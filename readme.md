@@ -1,6 +1,6 @@
 # Array - A Library for using resizable arrays
 
-## How to use
+## 1. How to use
 
 1.  Place the files `array.h` and `array.cpp` inside the root folder of your project
 2.  Example code to use the library:
