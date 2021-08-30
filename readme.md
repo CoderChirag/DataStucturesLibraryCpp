@@ -25,3 +25,6 @@
 
                 arr.display();
             }
+
+3.  To compile and run the code, write in terminal:
+    > g++ main.cpp -o main && main.exe
