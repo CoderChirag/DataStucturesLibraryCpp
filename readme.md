@@ -1,6 +1,6 @@
 # Array - A Library for using resizable arrays
 
-## 1. How to use
+## How to use
 
 1.  Place the files `array.h` and `array.cpp` inside the root folder of your project
 2.  Example code to use the library:
@@ -30,10 +30,12 @@
 3.  To compile and run the code, write in terminal:
     > g++ main.cpp -o main && main.exe
 
-## 2. Documentation
+## Documentation
 
 The Array class maintains an array, with its 2 properties:- **length** and **size**.
+
 **size** -> It is the maximum capacity of the array. When the maximum capacity is reached, the array class automatically resizes the array. By default, it's value is **10**.
+
 **length** -> It is the actual number of elements present in the array at any given time.
 
 ### 1. Constructors
