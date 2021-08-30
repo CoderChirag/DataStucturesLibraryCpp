@@ -4,23 +4,24 @@
 
 1.  Place the files `array.h` and `array.cpp` inside the root folder of your project
 2.  Example code to use the library:
-    #include<iostream>
-    #include"array.h"
-    #include"array.cpp"
-    using namespace std;
 
-        int main(){
-            Array<int> arr{5};
+        #include<iostream>
+        #include"array.h"
+        #include"array.cpp"
+        using namespace std;
 
-            arr.append(1);
-            arr.append(5);
-            arr.append(8);
+            int main(){
+                Array<int> arr{5};
 
-            cout << arr.getLength() <<endl;
-            cout << arr.getSize() <<endl;
+                arr.append(1);
+                arr.append(5);
+                arr.append(8);
 
-            cout << arr.get(5);
-            cout << arr.set(1, 5);
+                cout << arr.getLength() <<endl;
+                cout << arr.getSize() <<endl;
 
-            arr.display();
-        }
+                cout << arr.get(5);
+                cout << arr.set(1, 5);
+
+                arr.display();
+            }
