@@ -24,11 +24,13 @@ class Array{
         Array(const Array &array); // Copy Constructor
 
         // Mutators (Setters)
+        int set(int index, T x);
 
         // Accessors (Getters)
         T* getArray() const;
         int getLength() const;
         int getSize() const;
+        T get(int index) const;
 
         // Facilitators
         void display() const;

@@ -32,7 +32,15 @@ Array<T>::Array(const Array &array): Array{static_cast<int>(array.size), array.g
 
 
 // Mutators (Setters)
+template<class T>
+int Array<T>::set(int index, T x){
+    if(index >= length){
+        return 0;
+    }
 
+    arr[index] = x;
+    return 1;
+}
 
 
 // Accessors (Getters)
@@ -47,6 +55,14 @@ int Array<T>::getLength() const{
 template<class T>
 int Array<T>::getSize() const{
     return size;
+}
+template<class T>
+T Array<T>::get(int index) const{
+    if(index >= length){
+        throw ArrayException("Error: Index out of bound exception");
+    }
+
+    return arr[index];
 }
 
 
@@ -161,5 +177,3 @@ template<class T>
 Array<T>::~Array(){
     delete[] arr;
 }
-
-
