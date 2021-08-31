@@ -43,13 +43,7 @@ class Array{
         int bin_search(T element) const;
         T max() const;
         T min() const;
-        // T max();
-        // T min();
-        // T sum();
-        // max
-        // min
-        // sum
-        // reverse
+        void reverse();
         // shift / rotate
         // sortings
 

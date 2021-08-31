@@ -190,9 +190,9 @@ int Array<T>::search(T element, bool improvised) const{
     for (int i = 0; i < length; i++){
         if(element == arr[i]){
             if(improvised && i != 0){
-                arr[i] = arr[i] ^ arr[i - 1];
-                arr[i - 1] = arr[i] ^ arr[i - 1];
-                arr[i] = arr[i] ^ arr[i - 1];
+                T temp = arr[i];
+                arr[i] = arr[i - 1];
+                arr[i - 1] = temp;
             }
             return i;
         }
@@ -249,7 +249,15 @@ T Array<T>::min() const{
 
     return min;
 }
-
+template<class T>
+void Array<T>::reverse(){
+    // Time Complexity -> O(n)
+    for (int i = 0, j = length - 1; i < j; i++, j--){
+        T temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
+}
 
 
 

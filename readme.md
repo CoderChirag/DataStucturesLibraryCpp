@@ -67,3 +67,4 @@ The Array class maintains an array, with its 2 properties:- **length** and **siz
 -   `int bin_search(T element)` -> Performs binary search on the array for the specified value and returns the **index** of it. Time complexity is of O(logN).
 -   `T max()` - Returns the largest element of the array.
 -   `T min()` - Returns the smallest element of the array.
+-   `void reverse()` - Reverses the array.
