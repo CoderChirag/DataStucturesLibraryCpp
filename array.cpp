@@ -33,12 +33,13 @@ Array<T>::Array(const Array &array): Array{static_cast<int>(array.size), array.g
 
 // Mutators (Setters)
 template<class T>
-int Array<T>::set(int index, T x){
+int Array<T>::set(int index, T element){
+    // Time Complexity -> O(1)
     if(index >= length){
         return 0;
     }
 
-    arr[index] = x;
+    arr[index] = element;
     return 1;
 }
 
@@ -46,18 +47,27 @@ int Array<T>::set(int index, T x){
 // Accessors (Getters)
 template<class T>
 T* Array<T>::getArray() const{
-    return arr;
+    // Time Complexity -> O(n)
+    T* newArr = new T[length];
+    for (int i = 0; i < length; i++){
+        newArr[i] = arr[i];
+    }
+
+    return newArr;
 }
 template<class T>
 int Array<T>::getLength() const{
+    // Time Complexity -> O(1)
     return length;
 }
 template<class T>
 int Array<T>::getSize() const{
+    // Time Complexity -> O(1)
     return size;
 }
 template<class T>
 T Array<T>::get(int index) const{
+    // Time Complexity -> O(1)
     if(index >= length){
         throw ArrayException("Error: Index out of bound exception");
     }
@@ -77,7 +87,7 @@ void Array<T>::display() const{
     cout << endl;
 }
 template<class T>
-int Array<T>::append(T x){
+int Array<T>::append(T element){
     // Time Complexity
     // if size=length -> O(n)
     // else -> O(1)
@@ -87,23 +97,23 @@ int Array<T>::append(T x){
         for (int i = 0; i < length; i++){
             newArr[i] = arr[i];
         }
-        newArr[length] = x;
+        newArr[length] = element;
         length++;
         delete[] arr;
         arr = newArr;
     }else{
-        arr[length] = x;
+        arr[length] = element;
         length++;
     }
 
     return length;
 }
 template<class T>
-void Array<T>::insert(int index, T x){
+void Array<T>::insert(int index, T element){
     // Time Complexity -> O(n)
     try{
         if(index > length){
-            throw ArrayException("Index cannot be greater than length while inserting in array");
+            throw ArrayException("Index out of bound Exception");
         }
         if(length == size){
             size += 10;
@@ -114,7 +124,7 @@ void Array<T>::insert(int index, T x){
             for (int i = length; i > index; i--){
                 newArr[i] = arr[i - 1];
             }
-            newArr[index] = x;
+            newArr[index] = element;
             length++;
             delete[] arr;
             arr = newArr;
@@ -122,7 +132,7 @@ void Array<T>::insert(int index, T x){
             for (int i = length; i > index; i--){
                 arr[i] = arr[i - 1];
             }
-            arr[index] = x;
+            arr[index] = element;
             length++;
         }
     }catch(const ArrayException& e){
@@ -135,24 +145,24 @@ template<class T>
 T Array<T>::del(int index){
     // Time Complexity -> O(n)
     if(index >= length){
-        throw ArrayException("Index cannot be greater than length");
+        throw ArrayException("Error: Index out of bound Exception");
     }
 
-    T x = arr[index];
+    T element = arr[index];
     for (int i = index; i < length-1;i++){
         arr[i] = arr[i + 1];
     }
     arr[length - 1] = 0;
     length--;
-    return x;
+    return element;
 }
 template<class T>
-int Array<T>::remove(T x){
+int Array<T>::remove(T element){
     // Time Complexity -> O(n)
     bool flag = false;
     int index = 0;
     for (; index < length; index++){
-        if(arr[index] == x){
+        if(arr[index] == element){
             flag = true;
             break;
         }
@@ -167,6 +177,34 @@ int Array<T>::remove(T x){
     }else{
         return -1;
     }
+}
+template<class T>
+T Array<T>::pop(){
+    // Time Complexity -> O(1);
+    if(length == 0){
+        throw ArrayException("Error: Index out of bound exception");
+    }
+
+    T ele = arr[length - 1];
+    arr[length - 1] = 0;
+    length--;
+    return ele;
+}
+template<class T>
+int Array<T>::search(T element, bool improvised){
+    // Time Complexity -> O(n)
+    for (int i = 0; i < length; i++){
+        if(element == arr[i]){
+            if(improvised && i != 0){
+                arr[i] = arr[i] ^ arr[i - 1];
+                arr[i - 1] = arr[i] ^ arr[i - 1];
+                arr[i] = arr[i] ^ arr[i - 1];
+            }
+            return i;
+        }
+    }
+
+    return -1;
 }
 
 

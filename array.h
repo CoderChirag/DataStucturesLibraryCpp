@@ -24,7 +24,7 @@ class Array{
         Array(const Array &array); // Copy Constructor
 
         // Mutators (Setters)
-        int set(int index, T x);
+        int set(int index, T element);
 
         // Accessors (Getters)
         T* getArray() const;
@@ -34,10 +34,24 @@ class Array{
 
         // Facilitators
         void display() const;
-        int append(T x);
-        void insert(int index, T x);
+        int append(T element);
+        void insert(int index, T element);
         T del(int index);
-        int remove(T x);
+        int remove(T element);
+        T pop();
+        int search(T element, bool improvised=true);
+        //linear search
+        // T max();
+        // T min();
+        // T sum();
+        // max
+        // min
+        // sum
+        // reverse
+        // shift / rotate
+        // sortings
+
+
 
         // Destructors
         ~Array();
