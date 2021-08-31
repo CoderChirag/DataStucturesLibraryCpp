@@ -16,11 +16,11 @@ Array<T>::Array(): length{0}, size{10}{
     this->arr = new T[size]{0};
 }
 template<class T>
-Array<T>::Array(int size): length{static_cast<size_t>(size)}, size{static_cast<size_t>(size)} {
+Array<T>::Array(int size): length{size > 0 ? static_cast<size_t>(size) : 0}, size{size > 0 ? static_cast<size_t>(size) : 0} {
     this->arr = new T[size]{0};
 }
 template<class T>
-Array<T>::Array(int size, T arr[]): Array{size}{
+Array<T>::Array(int size, T arr[]): Array{size > 0 ? size : 0}{
     for (int i = 0; i < size; i++){
         this->arr[i] = arr[i];
     }
@@ -33,14 +33,13 @@ Array<T>::Array(const Array &array): Array{static_cast<int>(array.size), array.g
 
 // Mutators (Setters)
 template<class T>
-int Array<T>::set(int index, T element){
+void Array<T>::set(int index, T element){
     // Time Complexity -> O(1)
-    if(index >= length){
-        return 0;
+    if(index <= 0 || index >= length){
+        throw ArrayException("Error: Index out of bound Exception");
     }
 
     arr[index] = element;
-    return 1;
 }
 
 
@@ -68,7 +67,7 @@ int Array<T>::getSize() const{
 template<class T>
 T Array<T>::get(int index) const{
     // Time Complexity -> O(1)
-    if(index >= length){
+    if(index <= 0 || index >= length){
         throw ArrayException("Error: Index out of bound exception");
     }
 
@@ -111,40 +110,35 @@ int Array<T>::append(T element){
 template<class T>
 void Array<T>::insert(int index, T element){
     // Time Complexity -> O(n)
-    try{
-        if(index > length){
-            throw ArrayException("Index out of bound Exception");
-        }
-        if(length == size){
-            size += 10;
-            T *newArr = new T[size]{0};
-            for (int i = 0; i < index; i++){
-                newArr[i] = arr[i];
-            }
-            for (int i = length; i > index; i--){
-                newArr[i] = arr[i - 1];
-            }
-            newArr[index] = element;
-            length++;
-            delete[] arr;
-            arr = newArr;
-        }else{
-            for (int i = length; i > index; i--){
-                arr[i] = arr[i - 1];
-            }
-            arr[index] = element;
-            length++;
-        }
-    }catch(const ArrayException& e){
-        cout << "Error: " << e.what() << endl;
-    }catch(...){
-        cout << "Error: Something Went Wrong";
+    if(index <= 0 || index >= length){
+        throw ArrayException("Error: Index out of bound Exception");
     }
+    if(length == size){
+        size += 10;
+        T *newArr = new T[size]{0};
+        for (int i = 0; i < index; i++){
+            newArr[i] = arr[i];
+        }
+        for (int i = length; i > index; i--){
+            newArr[i] = arr[i - 1];
+        }
+        newArr[index] = element;
+        length++;
+        delete[] arr;
+        arr = newArr;
+    }else{
+        for (int i = length; i > index; i--){
+            arr[i] = arr[i - 1];
+        }
+        arr[index] = element;
+        length++;
+    }
+
 }
 template<class T>
 T Array<T>::del(int index){
     // Time Complexity -> O(n)
-    if(index >= length){
+    if(index <= 0 || index >= length){
         throw ArrayException("Error: Index out of bound Exception");
     }
 
@@ -191,7 +185,7 @@ T Array<T>::pop(){
     return ele;
 }
 template<class T>
-int Array<T>::search(T element, bool improvised){
+int Array<T>::search(T element, bool improvised) const{
     // Time Complexity -> O(n)
     for (int i = 0; i < length; i++){
         if(element == arr[i]){
@@ -205,6 +199,40 @@ int Array<T>::search(T element, bool improvised){
     }
 
     return -1;
+}
+template<class T>
+int Array<T>::bin_search(T element) const{
+    // Time complexity -> O(logn)
+    int l = 0;
+    int r = length - 1;
+    while (l<=r){
+        int mid = (l + r) / 2;
+        if(arr[mid] == element){
+            return mid;
+        }else if(element > arr[mid]){
+            l = mid + 1;
+        }else{
+            r = mid - 1;
+        }
+    }
+
+    return -1; 
+}
+template<class T>
+T Array<T>::max() const{
+    // Time Complexity -> O(n)
+    if(length == 0){
+        throw ArrayException("Error: Array is empty");
+    }
+
+    int max = arr[0];
+    for (int i = 0; i < length; i++){
+        if(arr[i] > max){
+            max = arr[i];
+        }
+    }
+
+    return max;
 }
 
 

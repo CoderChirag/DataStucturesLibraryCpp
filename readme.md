@@ -46,7 +46,7 @@ The Array class maintains an array, with its 2 properties:- **length** and **siz
 
 ### 2. Mutators (Setter Methods)
 
--   `int set(int index, T x)` -> Sets the value **x** at the specified **index** of the array. Returns **0** if index is greater than length. If it is successful, returns **1**.
+-   `void set(int index, T x)` -> Sets the value **x** at the specified **index** of the array.
 
 ### 3. Accessors (Getter Methods)
 

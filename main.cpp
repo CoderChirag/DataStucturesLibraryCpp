@@ -1,5 +1,4 @@
 #include<iostream>
-// #include<exception>
 #include "array.h"
 #include "array.cpp"
 using namespace std;
@@ -45,7 +44,7 @@ int main()
     a1.display();
     cout << endl;
 
-    cout << a1.set(4,40) << endl;
+    a1.set(4, 40);
     cout << a1.getLength() << ", " << a1.getSize() << endl;
     a1.display();
     cout << endl;
@@ -61,6 +60,16 @@ int main()
     cout << endl;
 
     cout << a1.search(5, false) << endl;
+    cout << a1.getLength() << ", " << a1.getSize() << endl;
+    a1.display();
+    cout << endl;
+
+    cout << a1.bin_search(5) << endl;
+    cout << a1.getLength() << ", " << a1.getSize() << endl;
+    a1.display();
+    cout << endl;
+
+    cout << a1.max() << endl;
     cout << a1.getLength() << ", " << a1.getSize() << endl;
     a1.display();
     cout << endl;

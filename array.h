@@ -24,7 +24,7 @@ class Array{
         Array(const Array &array); // Copy Constructor
 
         // Mutators (Setters)
-        int set(int index, T element);
+        void set(int index, T element);
 
         // Accessors (Getters)
         T* getArray() const;
@@ -39,8 +39,9 @@ class Array{
         T del(int index);
         int remove(T element);
         T pop();
-        int search(T element, bool improvised=true);
-        //linear search
+        int search(T element, bool improvised=true) const;
+        int bin_search(T element) const;
+        T max() const;
         // T max();
         // T min();
         // T sum();
