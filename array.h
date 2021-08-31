@@ -42,6 +42,7 @@ class Array{
         int search(T element, bool improvised=true) const;
         int bin_search(T element) const;
         T max() const;
+        T min() const;
         // T max();
         // T min();
         // T sum();

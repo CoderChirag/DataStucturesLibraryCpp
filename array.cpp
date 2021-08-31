@@ -225,7 +225,7 @@ T Array<T>::max() const{
         throw ArrayException("Error: Array is empty");
     }
 
-    int max = arr[0];
+    T max = arr[0];
     for (int i = 0; i < length; i++){
         if(arr[i] > max){
             max = arr[i];
@@ -233,6 +233,21 @@ T Array<T>::max() const{
     }
 
     return max;
+}
+template<class T>
+T Array<T>::min() const{
+    // Time Complexity -> O(n)
+    if(length == 0)
+        throw ArrayException("Error: Array is empty");
+
+    T min = arr[0];
+    for (int i = 0; i < length; i++){
+        if(arr[i] < min){
+            min = arr[i];
+        }
+    }
+
+    return min;
 }
 
 

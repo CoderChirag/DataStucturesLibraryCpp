@@ -74,6 +74,14 @@ int main()
     a1.display();
     cout << endl;
 
+    cout << a1.min() << endl;
+    cout << a1.getLength() << ", " << a1.getSize() << endl;
+    a1.display();
+    cout << endl;
+
+    string s = "Hello"*0;
+    cout << s;
+
     cin.get();
     return 0;
 }

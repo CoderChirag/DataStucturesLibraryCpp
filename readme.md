@@ -64,3 +64,6 @@ The Array class maintains an array, with its 2 properties:- **length** and **siz
 -   `int remove(T x)` -> Removes the given element from the array and returns the **index** on which it was previously present. Returns **-1** if the element was not found.
 -   `T pop()` -> Removes the last element from the array and returns the element popped out.
 -   `int search(T element, bool improvised=true)` -> Performs the linear search for the element specified and returns the index of the element. If **improvised** is `true`, it will swap the found element with the previous elements of the array to improve the efficiency in the next search. To prevent it set **improvised** to `false`. By default, improvised is set to `true`.
+-   `int bin_search(T element)` -> Performs binary search on the array for the specified value and returns the **index** of it. Time complexity is of O(logN).
+-   `T max()` - Returns the largest element of the array.
+-   `T min()` - Returns the smallest element of the array.
