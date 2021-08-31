@@ -1,5 +1,6 @@
 #include<iostream>
 #include<exception>
+#include<typeinfo>
 #include<string>
 #include "array.h"
 using namespace std;
@@ -258,6 +259,53 @@ void Array<T>::reverse(){
         arr[j] = temp;
     }
 }
+template<class T>
+void Array<T>::l_shift(){
+    try{
+        for (int i = 1; i < length; i++){
+            arr[i - 1] = arr[i];
+        }
+        arr[length - 1] = 0;
+    }catch(exception e){
+        cerr << e.what() << endl;
+    }
+}
+template<class T>
+void Array<T>::r_shift(){
+    try{
+        for (int i = length-1; i > 0; i--){
+            arr[i] = arr[i-1];
+        }
+        arr[0] = 0;
+    }catch(exception e){
+        cerr << e.what() << endl;
+    }
+}
+template<class T>
+void Array<T>::l_rotate(){
+    try{
+        T temp = arr[0];
+        for (int i = 1; i < length; i++){
+            arr[i - 1] = arr[i];
+        }
+        arr[length - 1] = temp;
+    }catch(exception e){
+        cerr << e.what() << endl;
+    }
+}
+template<class T>
+void Array<T>::r_rotate(){
+    try{
+        T temp = arr[length - 1];
+        for (int i = length-1; i > 0; i--){
+            arr[i] = arr[i-1];
+        }
+        arr[0] = temp;
+    }catch(exception e){
+        cerr << e.what() << endl;
+    }
+}
+
 
 
 

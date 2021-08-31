@@ -44,7 +44,10 @@ class Array{
         T max() const;
         T min() const;
         void reverse();
-        // shift / rotate
+        void l_shift();
+        void r_shift();
+        void l_rotate();
+        void r_rotate();
         // sortings
 
 

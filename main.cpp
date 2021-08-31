@@ -84,6 +84,26 @@ int main()
     a1.display();
     cout << endl;
 
+    a1.l_rotate();
+    cout << a1.getLength() << ", " << a1.getSize() << endl;
+    a1.display();
+    cout << endl;
+
+    a1.r_rotate();
+    cout << a1.getLength() << ", " << a1.getSize() << endl;
+    a1.display();
+    cout << endl;
+
+    a1.l_shift();
+    cout << a1.getLength() << ", " << a1.getSize() << endl;
+    a1.display();
+    cout << endl;
+
+    a1.r_shift();
+    cout << a1.getLength() << ", " << a1.getSize() << endl;
+    a1.display();
+    cout << endl;
+
     cin.get();
     return 0;
 }

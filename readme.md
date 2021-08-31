@@ -69,3 +69,7 @@ The Array class maintains an array, with its 2 properties:- **length** and **siz
 -   `T max()` - Returns the largest element of the array.
 -   `T min()` - Returns the smallest element of the array.
 -   `void reverse()` - Reverses the array.
+-   `void l_shift()` - Left shifts all the elements of the array, and the **rightmost element becomes 0**.
+-   `void r_shift()` - Right shifts all the elements of the array, and the **leftmost element becomes 0**.
+-   `void l_rotates()` - Rotates all the elements of the array to the left, so that the element which was **previously the first element** in the array, **becomes the rightmost element** after rotation.
+-   `void r_rotates()` - Rotates all the elements of the array to the right, so that the element which was **previously the rightmost element** in the array, **becomes the first element** after rotation.
