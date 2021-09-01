@@ -43,7 +43,7 @@ The Array class maintains an array, with its 2 properties:- **length** and **siz
 -   `Array()` -> Initializes an array with **length = 0** and **size = 10**.
 -   `Array(int size)` -> Initializes an array with the given **size**.
 -   `Array(int size, T arr[])` -> Initializes an array with the given **size** and fills it with the given **array**.
--   `Array(const Array& array)` -> **_Copy Constructor_**. Initializes the Array object by copying the array from the given Array object.
+-   `Array(const Array<T></T>& array)` -> **_Copy Constructor_**. Initializes the Array object by copying the array from the given Array object.
 
 ### 2. Mutators (Setter Methods)
 
