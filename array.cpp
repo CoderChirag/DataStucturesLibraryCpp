@@ -14,11 +14,11 @@ const char* ArrayException::what() const noexcept{
 // Constructors
 template<class T>
 Array<T>::Array(): length{0}, size{10}{
-    this->arr = new T[size]{0};
+    this->arr = new T[size];
 }
 template<class T>
 Array<T>::Array(int size): length{size > 0 ? static_cast<size_t>(size) : 0}, size{size > 0 ? static_cast<size_t>(size) : 0} {
-    this->arr = new T[size]{0};
+    this->arr = new T[size];
 }
 template<class T>
 Array<T>::Array(int size, T arr[]): Array{size > 0 ? size : 0}{
@@ -27,7 +27,11 @@ Array<T>::Array(int size, T arr[]): Array{size > 0 ? size : 0}{
     }
 }
 template<class T>
-Array<T>::Array(const Array &array): Array{static_cast<int>(array.size), array.get()}{
+Array<T>::Array(const Array<T> &array): size{static_cast<size_t>(array.getSize())}, length{static_cast<size_t>(array.getLength())} {
+    arr = new T[size];
+    for (int i = 0; i < length; i++){
+        arr[i] = array[i];
+    }
 } // Copy Constructor
 
 
@@ -306,6 +310,28 @@ void Array<T>::r_rotate(){
     }
 }
 
+
+// Operator Overloadings
+template<class T>
+T& Array<T>::operator[](int index) const{
+    if(index < 0 || index >= length){
+        throw ArrayException("Error: Index out of bound Exception.");
+    }
+    return arr[index];
+}
+template<class T>
+std::ostream& operator<<(std::ostream& out, const Array<T>& arr){
+    out << "[";
+    for (int i = 0; i < arr.length; i++){
+        if(i!=arr.length-1){
+            out << arr.arr[i] << ", ";
+        }else{
+            out << arr.arr[i] << "";
+        }
+    }
+    out << "]" << endl;
+    return out;
+}
 
 
 

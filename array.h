@@ -21,7 +21,7 @@ class Array{
         Array();
         Array(int size);
         Array(int size, T arr[]);
-        Array(const Array &array); // Copy Constructor
+        Array(const Array<T> &array); // Copy Constructor
 
         // Mutators (Setters)
         void set(int index, T element);
@@ -50,7 +50,10 @@ class Array{
         void r_rotate();
         // sortings
 
-
+        // Operator Overloadings
+        T& operator[](int index) const;
+        template<class U>
+        friend std::ostream &operator<<(std::ostream &out, const Array<U>& arr);
 
         // Destructors
         ~Array();

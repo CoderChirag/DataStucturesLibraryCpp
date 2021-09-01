@@ -104,6 +104,18 @@ int main()
     a1.display();
     cout << endl;
 
+    cout << "Element at 3rd index -> " << a1[3] << endl;
+    a1.display();
+    a1[3] = 50;
+    cout << "Updated element at 3rd index -> " << a1[3] << endl;
+    a1.display();
+    cout << endl;
+
+    cout << a1 << endl;
+
+    Array<int> a2{a1};
+    cout << a2;
+
     cin.get();
     return 0;
 }
