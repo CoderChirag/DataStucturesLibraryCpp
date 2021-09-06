@@ -5,7 +5,7 @@ This library is created for using various Data Structures easily in C++.
 ## Array
 
 -   Implements the resizable dynamic arrays.
--   Template class, can be used for any data type
+-   Built on template classes, so can be used for any data type
 
 ### How to use
 
@@ -18,21 +18,21 @@ This library is created for using various Data Structures easily in C++.
         #include"array.cpp"
         using namespace std;
 
-            int main(){
-                Array<int> arr{5};
+        int main(){
+            Array<int> arr{5};
 
-                arr.append(1);
-                arr.append(5);
-                arr.append(8);
+            arr.append(1);
+            arr.append(5);
+            arr.append(8);
 
-                cout << arr.getLength() <<endl;
-                cout << arr.getSize() <<endl;
+            cout << arr.getLength() <<endl;
+            cout << arr.getSize() <<endl;
 
-                cout << arr.get(5);
-                cout << arr.set(1, 5);
+            cout << arr.get(5);
+            cout << arr.set(1, 5);
 
-                arr.display();
-            }
+            arr.display();
+        }
 
 3.  To compile and run the code, write in terminal:
     > g++ main.cpp -o main && main.exe
