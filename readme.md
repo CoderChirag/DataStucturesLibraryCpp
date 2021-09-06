@@ -1,9 +1,16 @@
-# Array - A Library for using resizable arrays
+# My Data Structures Library
 
-## How to use
+This library is created for using various Data Structures easily in C++.
+
+## Array
+
+-   Implements the resizable dynamic arrays.
+-   Template class, can be used for any data type
+
+### How to use
 
 1.  Place the files `array.h` and `array.cpp` inside the root folder of your project
-2.  Example code to use the library:
+2.  Example code to use `Array`:
 
         // main.cpp
         #include<iostream>
@@ -30,7 +37,7 @@
 3.  To compile and run the code, write in terminal:
     > g++ main.cpp -o main && main.exe
 
-## Documentation
+### Documentation
 
 The Array class maintains an array, with its 2 properties:- **length** and **size**.
 
@@ -38,25 +45,25 @@ The Array class maintains an array, with its 2 properties:- **length** and **siz
 
 **length** -> It is the actual number of elements present in the array at any given time.
 
-### 1. Constructors
+#### 1. Constructors
 
 -   `Array()` -> Initializes an array with **length = 0** and **size = 10**.
 -   `Array(int size)` -> Initializes an array with the given **size**.
 -   `Array(int size, T arr[])` -> Initializes an array with the given **size** and fills it with the given **array**.
 -   `Array(const Array<T>& array)` -> **_Copy Constructor_**. Initializes the Array object by copying the array from the given Array object.
 
-### 2. Mutators (Setter Methods)
+#### 2. Mutators (Setter Methods)
 
 -   `void set(int index, T x)` -> Sets the value **x** at the specified **index** of the array.
 
-### 3. Accessors (Getter Methods)
+#### 3. Accessors (Getter Methods)
 
 -   `T* getArray() const` -> Returns the pointer to the complete array.
 -   `int getLength() const` -> Returns the **length** of the array.
 -   `int getSize() const` -> Returns the **size (current maximum capacity)** of the array.
 -   `T get(int index) const` -> Returns the **value** at the specified index.
 
-### 4. Facilitators
+#### 4. Facilitators
 
 -   `void display() const` -> Prints space separated all the members of the array.
 -   `int append(T x)` -> Appends the given element at the last of the array and returns the **length** of the new array.
@@ -66,10 +73,15 @@ The Array class maintains an array, with its 2 properties:- **length** and **siz
 -   `T pop()` -> Removes the last element from the array and returns the element popped out.
 -   `int search(T element, bool improvised=true)` -> Performs the linear search for the element specified and returns the index of the element. If **improvised** is `true`, it will swap the found element with the previous elements of the array to improve the efficiency in the next search. To prevent it set **improvised** to `false`. By default, improvised is set to `true`.
 -   `int bin_search(T element)` -> Performs binary search on the array for the specified value and returns the **index** of it. Time complexity is of O(logN).
--   `T max()` - Returns the largest element of the array.
--   `T min()` - Returns the smallest element of the array.
--   `void reverse()` - Reverses the array.
--   `void l_shift()` - Left shifts all the elements of the array, and the **rightmost element becomes 0**.
--   `void r_shift()` - Right shifts all the elements of the array, and the **leftmost element becomes 0**.
--   `void l_rotate()` - Rotates all the elements of the array to the left, so that the element which was **previously the first element** in the array, **becomes the rightmost element** after rotation.
--   `void r_rotate()` - Rotates all the elements of the array to the right, so that the element which was **previously the rightmost element** in the array, **becomes the first element** after rotation.
+-   `T max()` -> Returns the largest element of the array.
+-   `T min()` -> Returns the smallest element of the array.
+-   `void reverse()` -> Reverses the array.
+-   `void l_shift()` -> Left shifts all the elements of the array, and the **rightmost element becomes 0**.
+-   `void r_shift()` -> Right shifts all the elements of the array, and the **leftmost element becomes 0**.
+-   `void l_rotate()` -> Rotates all the elements of the array to the left, so that the element which was **previously the first element** in the array, **becomes the rightmost element** after rotation.
+-   `void r_rotate()` -> Rotates all the elements of the array to the right, so that the element which was **previously the rightmost element** in the array, **becomes the first element** after rotation.
+
+#### 5. Operator Overloads
+
+-   Subscript Operator(`[]`) -> Can be used to **access** and **assign** the value.
+-   Extraction Operator(`<<`) -> For printing the whole array. Eg. `cout << arr;` **output** - `[1, 2, 3, 4, 5]`
