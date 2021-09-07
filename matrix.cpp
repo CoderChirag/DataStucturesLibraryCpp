@@ -210,6 +210,73 @@ LowerTriangularMatrix::~LowerTriangularMatrix(){
 }
 
 
+// ---------------- UpperTriangular Matrix -------------------------------
+// Constructors
+UpperTriangularMatrix::UpperTriangularMatrix(int n, const int* rowMajorElements){
+    this->m = n;
+    this->n = n;
+    arr = new int[(n*(n+1))/2];
+    for (int i = 0; i < (n*(n+1))/2; i++){
+        arr[i] = rowMajorElements[i];
+    }
+}
+UpperTriangularMatrix::UpperTriangularMatrix(const UpperTriangularMatrix& mat){
+    this->m = mat.getRows();
+    this->n = mat.getCols();
+    arr = mat.getRepresentation();
+}
+
+// Accessors
+int** UpperTriangularMatrix::get() const{
+    int **mat = new int*[n];
+    int k = 0;
+    for (int i = 0; i<n; i++){
+        int *row = new int[n]{0};
+        mat[i] = row;
+        for (int j = 0; j < n; j++){
+            if(i <= j){
+                row[j] = arr[k];
+                k++;
+            }
+        }
+    }
+    return mat;
+}
+int* UpperTriangularMatrix::getRepresentation() const{
+    int* arr = new int[(n*(n+1))/2];
+    for (int i = 0; i < (n*(n+1))/2; i++){
+        arr[i] = this->arr[i];
+    }
+    return arr;
+}
+int UpperTriangularMatrix::at(int i, int j) const{
+    if(i < m && j < n && i >= 0 && j >= 0){
+        if(i <= j){
+            return arr[(i*n - (i*(i-1))/2) + (j-i)];
+        }
+        return 0;
+    }
+
+    throw std::runtime_error(std::string("Array index out of bound exception"));
+}
+
+// Mutators
+void UpperTriangularMatrix::set(int i, int j, int num){
+    if(i < m && j < n && i >= 0 && j >= 0){
+        if(i <= j){
+            arr[(i*n - (i*(i-1))/2) + (j-i)] = num;
+        }
+        return;
+    }
+    throw std::runtime_error(std::string("Array index out of bound exception"));
+}
+
+// Destructors
+UpperTriangularMatrix::~UpperTriangularMatrix(){
+    delete[] arr;
+}
+
+
 
 // Operator Overloads
 std::ostream &operator<<(std::ostream& cout, const Matrixx& mat){
@@ -250,6 +317,22 @@ std::ostream &operator<<(std::ostream &cout, const LowerTriangularMatrix &mat){
     for (int i = 0; i < mat.m; i++){
         for (int j = 0; j < mat.n; j++){
             if(i >= j){
+                cout << mat.arr[k] << " ";
+                k++;
+            }else{
+                cout << "0 ";
+            }
+        }
+        cout << std::endl;
+    }
+
+    return cout;
+}
+std::ostream &operator<<(std::ostream &cout, const UpperTriangularMatrix &mat){
+    int k = 0;
+    for (int i = 0; i < mat.m; i++){
+        for (int j = 0; j < mat.n; j++){
+            if(i <= j){
                 cout << mat.arr[k] << " ";
                 k++;
             }else{
