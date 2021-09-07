@@ -6,6 +6,7 @@ class Matrix{
     public:
         // Accessors (Getter Functions)
         virtual int at(int i, int j) const = 0;
+        virtual int **get() const = 0;
         int getRows() const;
         int getCols() const;
 
@@ -60,7 +61,7 @@ class DiagonalMatrix : public Matrix{
         DiagonalMatrix(const DiagonalMatrix &mat);
 
         // Accessors (Getter Functions)
-        int* get() const;
+        int** get() const;
         int at(int i, int j) const;
 
         // Mutators (Setter Functions)
@@ -89,7 +90,8 @@ class LowerTriangularMatrix : public Matrix{
         LowerTriangularMatrix(const LowerTriangularMatrix &mat);
 
         // Accessors (Getter Functions)
-        int* get() const;
+        int** get() const;
+        int *getRepresentation() const;
         int at(int i, int j) const;
 
         // Mutators (Setter Functions)
