@@ -276,6 +276,184 @@ UpperTriangularMatrix::~UpperTriangularMatrix(){
     delete[] arr;
 }
 
+// ------------------------ Sparse Matrix ------------------------
+SparseElement::SparseElement() : i{-1}, j{-1}, x{0}{}
+// Constructors
+SparseMatrix::SparseMatrix(int m, int n): num{0}, size{0}{
+    this->m = m;
+    this->n = n;
+    ele = new SparseElement[this->num];
+}
+SparseMatrix::SparseMatrix(SparseMatrix& mat){
+    m = mat.getRows();
+    n = mat.getCols();
+    num = mat.getSparseArrayLength();
+    size = mat.getSize();
+    ele = mat.getSparseElements();
+}
+
+// Accessors (Getter Functions)
+int SparseMatrix::getSparseArrayLength() const{
+    return num;
+}
+int SparseMatrix::getSize() const{
+    return size;
+}
+SparseElement* SparseMatrix::getSparseElements() const{
+    SparseElement *ele = new SparseElement[num];
+    for (int i = 0; i < num; i++){
+        ele[i] = this->ele[i];
+    }
+    return ele;
+}
+int SparseMatrix::getSparseIndex(int i, int j) const{
+    if(i < m && j < n && i >=0 && j >= 0){
+        int l = 0;
+        int r = num - 1;
+        while(l<=r){
+            int mid = (l + r) / 2;
+            if(ele[mid].i == i){
+                if(ele[mid].j == j){
+                    return mid;
+                }else if(ele[mid].j < j){
+                    l = mid + 1;
+                }else{
+                    r = mid - 1;
+                }
+            }else if(ele[mid].i < i){
+                l = mid + 1;
+            }else{
+                r = mid - 1;
+            }
+        }
+        return -1;
+    }
+
+    throw std::runtime_error(std::string("Array index out of bound exception "));
+}
+int** SparseMatrix::get() const{
+    int **mat = new int *[m];
+    for (int i = 0; i < m; i++){
+        int *row = new int[n]{0};
+        mat[i] = row;
+    }
+    for (int i = 0; i < num; i++){
+        if(!ele[i].i == -1 && !ele[i].j == -1){
+            mat[ele[i].i][ele[i].j] = ele[i].x;
+        }
+    }
+    return mat;
+}
+int SparseMatrix::at(int i, int j) const{
+    if(i < m && j < n && i >=0 && j >= 0){
+        int l = 0;
+        int r = num - 1;
+        while(l<=r){
+            int mid = (l + r) / 2;
+            if(ele[mid].i == i){
+                if(ele[mid].j == j){
+                    return ele[mid].x;
+                }else if(ele[mid].j < j){
+                    l = mid + 1;
+                }else{
+                    r = mid - 1;
+                }
+            }else if(ele[mid].i < i){
+                l = mid + 1;
+            }else{
+                r = mid - 1;
+            }
+        }
+        return 0;
+    }
+
+    throw std::runtime_error(std::string("Array index out of bound exception "));
+}
+
+// Mutators (Setter Functions)
+void SparseMatrix::set(int i, int j, int x){
+    if(i < m && j < n && i >=0 && j >= 0){
+        int index = getSparseIndex(i, j);
+        if(x == 0){
+            if( index != -1){
+                for (int k = index; k < num-1; k++){
+                    ele[k] = ele[k + 1];
+                }
+                ele[num - 1].i = -1;
+                ele[num - 1].j = -1;
+                ele[num - 1].x = 0;
+                num--;
+            }
+        }else{
+            if(index != -1){
+                ele[index].x = x;
+            }else{
+                SparseElement *ele = new SparseElement[num + 1];
+                bool flag = false;
+
+                if(num == 0){
+                    ele[0].i = i;
+                    ele[0].j = j;
+                    ele[0].x = x;
+                    flag = true;
+                }else{
+                    int k = 0;
+                    while(k<num && this->ele[k].i < i){
+                        ele[k] = this->ele[k];
+                        k++;
+                    }
+                    if(k<num && this->ele[k].i == i){
+                        while(k<num && this->ele[k].j < j){
+                            ele[k] = this->ele[k];
+                            k++;
+                        }
+                        if(k<num && this->ele[k].j > j){
+                            ele[k].i = i;
+                            ele[k].j = j;
+                            ele[k].x = x;
+                            flag = true;
+                            k++;
+                        }
+
+                    }else if(k < num){
+                        ele[k].i = i;
+                        ele[k].j = j;
+                        ele[k].x = x;
+                        flag = true;
+                        k++;
+                    }
+
+                    
+                    if(flag){
+                        while(k<num+1){
+                            ele[k] = this->ele[k - 1];
+                            k++;
+                        }
+                    }else{
+                        ele[num].i = i;
+                        ele[num].j = j;
+                        ele[num].x = x;
+                        flag = true;
+                    }
+
+                }
+
+                num++;
+                delete[] this->ele;
+                this->ele = ele;
+            }
+        }
+        return;
+    }
+
+    throw std::runtime_error(std::string("Array index out of bound exception "));
+}
+
+// Destructor
+SparseMatrix::~SparseMatrix(){
+    delete[] ele;
+}
+
 
 
 // Operator Overloads
@@ -342,5 +520,19 @@ std::ostream &operator<<(std::ostream &cout, const UpperTriangularMatrix &mat){
         cout << std::endl;
     }
 
+    return cout;
+}
+std::ostream& operator<<(std::ostream& cout, SparseMatrix& mat){
+    for (int i = 0; i < mat.m; i++){
+        for (int j = 0; j < mat.n; j++){
+            int index = mat.getSparseIndex(i, j);
+            if(index == -1){
+                cout << "0 ";
+            }else{
+                cout << mat.ele[index].x << " ";
+            }
+        }
+        cout << std::endl;
+    }
     return cout;
 }

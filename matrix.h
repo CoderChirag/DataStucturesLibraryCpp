@@ -140,4 +140,47 @@ class UpperTriangularMatrix : public Matrix{
         // Destructors
         ~UpperTriangularMatrix();
 };
+
+class SparseElement{
+    public:
+        int i;
+        int j;
+        int x;
+        SparseElement();
+};
+class SparseMatrix : public Matrix{
+    private:
+        int num, size;
+        SparseElement *ele;
+    public:
+        // Constructors
+        SparseMatrix(int m, int n);
+        SparseMatrix(SparseMatrix &mat); // Copy Cinstructor
+
+        // Accessors (Getter Functions)
+        int getSparseArrayLength() const;
+        int getSize() const;
+        SparseElement *getSparseElements() const;
+        int getSparseIndex(int i, int j) const;
+        int **get() const;
+        int at(int i, int j) const;
+
+        // Mutators (Setter Functions)
+        void set(int i, int j, int x);
+
+
+        // Facilitators
+        // int *add(Matrix &mat);
+        // int *subtract(Matrix &mat);
+        // int *subtractFrom(Matrix &mat);
+        // int *multiplyWith(Matrix &mat);
+        // int *multiplyTo(Matrix &mat);
+
+
+        // Operator Overloads
+        friend std::ostream &operator<<(std::ostream &cout, SparseMatrix &mat);
+
+        // Destructors
+        ~SparseMatrix();
+};
 #endif
