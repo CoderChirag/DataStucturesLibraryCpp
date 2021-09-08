@@ -170,7 +170,7 @@ class SparseMatrix : public Matrix{
 
 
         // Facilitators
-        // int *add(Matrix &mat);
+        SparseMatrix* add(const SparseMatrix& s) const;
         // int *subtract(Matrix &mat);
         // int *subtractFrom(Matrix &mat);
         // int *multiplyWith(Matrix &mat);
@@ -178,6 +178,7 @@ class SparseMatrix : public Matrix{
 
 
         // Operator Overloads
+        // SparseMatrix operator+(SparseMatrix &s);
         friend std::ostream &operator<<(std::ostream &cout, SparseMatrix &mat);
 
         // Destructors
