@@ -147,6 +147,8 @@ class SparseElement{
         int j;
         int x;
         SparseElement();
+
+        friend std::ostream &operator<<(std::ostream &cout, SparseElement &ele);
 };
 class SparseMatrix : public Matrix{
     private:

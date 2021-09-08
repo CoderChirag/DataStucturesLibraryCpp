@@ -598,6 +598,10 @@ std::ostream &operator<<(std::ostream &cout, const UpperTriangularMatrix &mat){
 
     return cout;
 }
+std::ostream& operator<<(std::ostream &cout, SparseElement &ele){
+    cout << "i: " << ele.i << ", j: " << ele.j << ", x: " << ele.x << std::endl;
+    return cout;
+}
 std::ostream& operator<<(std::ostream& cout, SparseMatrix& mat){
     for (int i = 0; i < mat.m; i++){
         for (int j = 0; j < mat.n; j++){
