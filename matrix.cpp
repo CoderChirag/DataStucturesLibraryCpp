@@ -449,7 +449,7 @@ void SparseMatrix::set(int i, int j, int x){
     throw std::runtime_error(std::string("Array index out of bound exception "));
 }
 
-// Operator Overloads
+//  Facilitators
 SparseMatrix* SparseMatrix::add(const SparseMatrix& s) const{
     if(m!=s.m || n!=s.n)
         throw std::runtime_error(std::string("Only thee matrices having same rows and columns can be added"));
@@ -459,9 +459,6 @@ SparseMatrix* SparseMatrix::add(const SparseMatrix& s) const{
     SparseElement *ele = new SparseElement[num + s.num];
     sum->ele = ele;
     sum->size = num + s.num;
-    // std::cout << ele[0].i << " " << ele[0].j << " " << ele[0].x << std::endl;
-    // std::cout << s.ele[0].i << " " << s.ele[0].j << " " << s.ele[0].x << std::endl;
-    // std::cout << sum->ele[0].i << " " << sum->ele[0].j << " " << sum->ele[0].x << std::endl;
     int i = 0, j = 0, k = 0;
     while(i < num && j < s.num){
         if(this->ele[i].i < s.ele[j].i){
@@ -486,12 +483,46 @@ SparseMatrix* SparseMatrix::add(const SparseMatrix& s) const{
         sum->ele[k++] = s.ele[j++];
     }
     sum->num = k;
-    // std::cout << sum->num << " " << sum->size << std::endl;
-    // for(int a = 0; a < sum->num; a++){
-    //     std::cout << sum->ele[a].i << " " << sum->ele[a].j << " " << sum->ele[a].x << std::endl;
-    // }
 
     return sum;
+}
+
+// Operator Overloads
+SparseMatrix& SparseMatrix::operator+(SparseMatrix &s){
+    if(m!=s.m || n!=s.n)
+        throw std::runtime_error(std::string("Only thee matrices having same rows and columns can be added"));
+
+    SparseMatrix *sum = new SparseMatrix{m, n};
+    delete[] sum->ele;
+    SparseElement *ele = new SparseElement[num + s.num];
+    sum->ele = ele;
+    sum->size = num + s.num;
+    int i = 0, j = 0, k = 0;
+    while(i < num && j < s.num){
+        if(this->ele[i].i < s.ele[j].i){
+            sum->ele[k++] = this->ele[i++];
+        }else if(this->ele[i].i > s.ele[j].i){
+            sum->ele[k++] = s.ele[j++];
+        }else{
+            if(this->ele[i].j < s.ele[j].j){
+                sum->ele[k++] = this->ele[i++];
+            }else if(this->ele[i].j > s.ele[j].j){
+                sum->ele[k++] = s.ele[j++];
+            }else{
+                sum->ele[k] = this->ele[i++];
+                sum->ele[k++].x += s.ele[j++].x;
+            }
+        }
+    }
+    while(i < num){
+        sum->ele[k++] = this->ele[i++];
+    }
+    while(j < s.num){
+        sum->ele[k++] = s.ele[j++];
+    }
+    sum->num = k;
+
+    return *sum;
 }
 
 // Destructor

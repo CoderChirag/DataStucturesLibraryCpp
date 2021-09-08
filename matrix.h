@@ -178,7 +178,7 @@ class SparseMatrix : public Matrix{
 
 
         // Operator Overloads
-        // SparseMatrix operator+(SparseMatrix &s);
+        SparseMatrix& operator+(SparseMatrix &s);
         friend std::ostream &operator<<(std::ostream &cout, SparseMatrix &mat);
 
         // Destructors
