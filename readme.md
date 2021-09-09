@@ -84,4 +84,224 @@ The Array class maintains an array, with its 2 properties:- **length** and **siz
 #### 5. Operator Overloads
 
 -   Subscript Operator(`[]`) -> Can be used to **access** and **assign** the value.
--   Extraction Operator(`<<`) -> For printing the whole array. Eg. `cout << arr;` **output** - `[1, 2, 3, 4, 5]`
+-   Insertion Operator(`<<`) -> For printing the whole array. Eg. `cout << arr;` **output** - `[1, 2, 3, 4, 5]`
+
+## Matrix
+
+-   Implements the different types of matrices.
+
+### How to use
+
+1.  Place the files `matrix.h` and `matrix.cpp` inside the root folder of your project
+2.  Example code to use `Matrix`:
+
+        // main.cpp
+        #include<iostream>
+        #include"matrix.h"
+        #include"matrix.cpp"
+        using namespace std;
+
+        int main(){
+            Matrixx mat{5, 6};
+
+            mat.set(1, 2, 3);
+            mat.set(0, 4, 6);
+
+            cout << mat.get(1, 2) <<endl;
+            cout << mat.get(4, 5) <<endl;
+
+            cout << mat;
+        }
+
+3.  To compile and run the code, write in terminal:
+    > g++ main.cpp -o main && main.exe
+
+### Documentation
+
+The `matrix.h` header file contains one **Virtual** base class `Matrix` and various classes inheriting it.
+
+As `Matrix` is a **Virtual** class, you cannot initialize it directly, you have to take the object of the classes inheriting from it.
+
+Following are the classes inheriting it.
+
+#### _class Matrix_
+
+This is the base class for all classes in Matrix.
+This class is virtual so, cannot be instantiated
+
+##### 1. Accessors (Getter Functions)
+
+-   `virtual int at(int i, int j) const = 0` -> **Pure Virtual Function**. Returns the value at the **ith, jth** position of the matrix.
+-   `virtual int** get() const = 0` -> **Pure Virtual Function**. Returns the whole 2D array.
+-   `int getRows() const` -> Returns the number of rows of the matrix.
+-   `int getCols() const` -> Returns the columns of the matrix.
+
+##### 2. Mutators (Setter Functions)
+
+-   `virtual void set(int i, int j, int num) = 0` -> **Pure Virtual Function**. Sets the value at the **ith, jth** position of the matrix.
+
+#### _class Matrixx: public Matrix_
+
+This class is for using normal 2D arrays.
+
+##### 1. Constructors
+
+-   `Matrixx(int m, int n)` -> Initializes an 2D array with the given dimensions **m X n**.
+-   `Matrixx(int m, int n, int* matrix)` -> Initializes an 2D array with the given dimensions **m X n** and with the given 2D array. Eg:-
+
+        int arr[][2] = {{1, 2}, {1, 2}};
+        Matrixx M{2, 2, (int*)arr};
+
+-   `Matrixx(const Matrixx &mat)` -> **_Copy Constructor_**. Initializes the Matrixx object by copying the 2D array from the given Matrixx object.
+
+##### 2. Mutators (Setter Methods)
+
+-   `void set(int i, int j, int num)` -> Sets the value at the specified **i** and **j** of the 2D array.
+
+##### 3. Accessors (Getter Methods)
+
+-   `int** get() const` -> Returns the pointer to the complete 2D array.
+-   `int at(int i, int j) const` -> Returns the **value** at the specified **i, j**.
+
+##### 4. Operator Overloads
+
+-   Insertion Operator(`<<`) -> For printing the whole 2D array. Eg. `cout << matrix;`, **output** :-
+
+        1 2
+        1 2
+
+#### _class DiagonalMatrix: public Matrix_
+
+This class if for using special type of Matrix - **_Diagonal Matrix_**.
+
+Implements a Diagonal Matrix in a very space efficient manner by using 1D arrays for storing elements.
+
+##### 1. Constructors
+
+-   `DiagonalMatrix(int n, const int *diagonalElements)` -> Initializes a **n X n** matrix with the given diagonal elements. Eg :-
+
+        int diagonalElements[5] = {3, 7, 4, 9, 6};
+        DiagonalMatrix M{5, diagonalElements};
+
+-   `DiagonalMatrix(const DiagonalMatrix& mat)` -> **_Copy Constructor_**. Initializes a diagonal matrix by copying from the given DiagonalMatrix object.
+
+##### 2. Mutators (Setter Methods)
+
+-   `void set(int i, int j, int num)` -> Sets the value at the specified **i** and **j** of the diagonal matrix.
+
+##### 3. Accessors (Getter Methods)
+
+-   `int** get() const` -> Returns the pointer to the complete matrix.
+-   `int at(int i, int j) const` -> Returns the **value** at the specified **i, j**.
+
+##### 4. Operator Overloads
+
+-   Insertion Operator(`<<`) -> For printing the whole matrix. Eg. `cout << matrix;`, **output** :-
+
+        1 0 0 0
+        0 2 0 0
+        0 0 5 0
+        0 0 0 3
+
+#### _class LowerTriangularMatrix: public Matrix_
+
+Implements **_Lower Triangular Matrix_** in a space efficient manner.
+
+##### 1. Constructors
+
+-   `LowerTriangularMatrix(int n, const int *rowMajorElements)` -> Initializes a **n X n** matrix with the given non-zero elements row by row. Eg :-
+
+        int rowMajorElements[15] = {3, 7, 4, 9, 6, 5, 4, 7, 2, 1, 8, 4, 9, 3, 8};
+        LowerTriangularMatrix M{5, diagonalElements};
+
+-   `LowerTriangularMatrix(const LowerTriangularMatrix& mat)` -> **_Copy Constructor_**. Initializes a lower triangular matrix by copying from the given LowerTriangularMatrix object.
+
+##### 2. Mutators (Setter Methods)
+
+-   `void set(int i, int j, int num)` -> Sets the value at the specified **i** and **j** of the lower triangular matrix.
+
+##### 3. Accessors (Getter Methods)
+
+-   `int** get() const` -> Returns the pointer to the complete matrix.
+-   `int* getRepresentation() const` -> Returns the 1D array of row major elements, in which the class is storing the non-zero elements of the matrix.
+-   `int at(int i, int j) const` -> Returns the **value** at the specified **i, j**.
+
+##### 4. Operator Overloads
+
+-   Insertion Operator(`<<`) -> For printing the whole matrix. Eg. `cout << matrix;`, **output** :-
+
+        1 0 0 0
+        3 2 0 0
+        7 9 5 0
+        6 3 2 3
+
+#### _class UpperTriangularMatrix: public Matrix_
+
+Implements **_Upper Triangular Matrix_** in a space efficient manner.
+
+##### 1. Constructors
+
+-   `UpperTriangularMatrix(int n, const int *rowMajorElements)` -> Initializes a **n X n** matrix with the given non-zero elements row by row. Eg :-
+
+        int rowMajorElements[15] = {3, 7, 4, 9, 6, 5, 4, 7, 2, 1, 8, 4, 9, 3, 8};
+        UpperTriangularMatrix M{5, diagonalElements};
+
+-   `UpperTriangularMatrix(const UpperTriangularMatrix& mat)` -> **_Copy Constructor_**. Initializes an upper triangular matrix by copying from the given UpperTriangularMatrix object.
+
+##### 2. Mutators (Setter Methods)
+
+-   `void set(int i, int j, int num)` -> Sets the value at the specified **i** and **j** of the upper triangular matrix.
+
+##### 3. Accessors (Getter Methods)
+
+-   `int** get() const` -> Returns the pointer to the complete matrix.
+-   `int* getRepresentation() const` -> Returns the 1D array of row major elements, in which the class is storing the non-zero elements of the matrix.
+-   `int at(int i, int j) const` -> Returns the **value** at the specified **i, j**.
+
+##### 4. Operator Overloads
+
+-   Insertion Operator(`<<`) -> For printing the whole matrix. Eg. `cout << matrix;`, **output** :-
+
+        1 4 3 8
+        0 2 2 9
+        0 0 5 7
+        0 0 0 3
+
+#### _class SparseMatrix: public Matrix_
+
+Implements a **_Sparse Matrix_** in a very space efficient manner.
+
+Uses another class **_SparseElement_** for implementing the matrix.
+
+##### 1. Constructors
+
+-   `SparseMatrix(int m, int n)` -> Initializes a **m X n** matrix with all elements initialized from **0**. Eg :- `SparseMatrix S{8, 9};`
+
+-   `SparseMatrix(const SparseMatrix& mat)` -> **_Copy Constructor_**. Initializes a sparse matrix by copying from the given SparseMatrix object.
+
+##### 2. Mutators (Setter Methods)
+
+-   `void set(int i, int j, int x)` -> Sets the value at the specified **i** and **j** of the matrix.
+
+##### 3. Accessors (Getter Methods)
+
+-   `int getSparseArrayLength() const` -> Returns the length of the array in which the class is storing all non zero elements of the matrix.
+-   `int getSize() const` -> Returns the current maximum size of the **Sparse Array**. This size is automatically increased when needed.
+-   `SparseElement *getSparseArray() const` -> Returns the **SparseArray** which is the array of **SparseElement** objects.
+-   `int getSparseIndex(int i, int j)` -> Returns the index on which the given element with **i, j** position is stored in the **SparseArray**. If it is not found **-1** is returned;
+-   `int** get() const` -> Returns the pointer to the complete matrix.
+-   `int at(int i, int j) const` -> Returns the **value** at the specified **i, j**.
+
+##### 4. Facilitators
+
+-   `SparseMatrix* add(const SparseMatrix& s) const` -> Adds the given SparseMatrix with the current SparseMatrix and returns a pointer to the new SparseMatrix object.
+
+##### 5. Operator Overloads
+
+-   Addition Operator(`+`) -> For adding the two SparseMatrix. Eg. `cout << S1 + S2;`
+-   Insertion Operator(`<<`) -> For printing the whole matrix. Eg. `cout << matrix;`, **output** :-
+
+        1 0 0 0
+        0 2 0 9
+        0 0 0 0
+        0 0 5 0

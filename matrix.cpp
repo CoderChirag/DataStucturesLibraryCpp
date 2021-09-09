@@ -21,16 +21,15 @@ Matrixx::Matrixx(int m, int n){
         mat[i] = new int[n]{0};
     }
 }
-Matrixx::Matrixx(int m, int n, const void* matrix){
+Matrixx::Matrixx(int m, int n, int* matrix){
     this->m = m;
     this->n = n;
-    int** mat = (int **)matrix;
     this->mat = new int *[m];
     for (int i = 0; i < m; i++){
         int *col = new int[n];
         this->mat[i] = col;
         for (int j = 0; j < n; j++){
-            this->mat[i][j] = mat[i][j];
+            this->mat[i][j] = *((matrix+i*n) + j);
         }
     }
 }
@@ -289,7 +288,7 @@ SparseMatrix::SparseMatrix(SparseMatrix& mat){
     n = mat.getCols();
     num = mat.getSparseArrayLength();
     size = mat.getSize();
-    ele = mat.getSparseElements();
+    ele = mat.getSparseArray();
 }
 
 // Accessors (Getter Functions)
@@ -299,7 +298,7 @@ int SparseMatrix::getSparseArrayLength() const{
 int SparseMatrix::getSize() const{
     return size;
 }
-SparseElement* SparseMatrix::getSparseElements() const{
+SparseElement* SparseMatrix::getSparseArray() const{
     SparseElement *ele = new SparseElement[num];
     for (int i = 0; i < num; i++){
         ele[i] = this->ele[i];

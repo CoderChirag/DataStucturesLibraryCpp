@@ -27,7 +27,7 @@ class Matrixx : public Matrix{
     public:
         // Constructors
         Matrixx(int m, int n);
-        Matrixx(int m, int n, const void* matrix);
+        Matrixx(int m, int n, int* matrix);
         Matrixx(const Matrixx &mat); // Copy Constructor
 
         // Accessors (Getter Functions)
@@ -157,12 +157,12 @@ class SparseMatrix : public Matrix{
     public:
         // Constructors
         SparseMatrix(int m, int n);
-        SparseMatrix(SparseMatrix &mat); // Copy Cinstructor
+        SparseMatrix(SparseMatrix &mat); // Copy Constructor
 
         // Accessors (Getter Functions)
         int getSparseArrayLength() const;
         int getSize() const;
-        SparseElement *getSparseElements() const;
+        SparseElement *getSparseArray() const;
         int getSparseIndex(int i, int j) const;
         int **get() const;
         int at(int i, int j) const;
