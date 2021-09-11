@@ -306,7 +306,7 @@ Uses another class **_SparseElement_** for implementing the matrix.
         0 0 0 0
         0 0 5 0
 
-<!-- ## LinkedList
+## LinkedList
 
 -   Implements the linked list.
 -   Built on template classes, so can be used for any data type
@@ -330,12 +330,12 @@ Uses another class **_SparseElement_** for implementing the matrix.
             LL.prepend(5);
             LL.insert(3, 8);
 
-            cout << arr.size() <<endl;
+            cout << LL.size() <<endl;
 
-            cout << arr.get(5);
-            cout << arr.set(1, 5);
+            cout << LL[2];
+            LL[2] = 10;
 
-            arr.display();
+            LL.display();
         }
 
 3.  To compile and run the code, write in terminal:
@@ -343,49 +343,38 @@ Uses another class **_SparseElement_** for implementing the matrix.
 
 ### Documentation
 
-The Array class maintains an array, with its 2 properties:- **length** and **size**.
-
-**size** -> It is the maximum capacity of the array. When the maximum capacity is reached, the array class automatically resizes the array. By default, it's value is **10**.
-
-**length** -> It is the actual number of elements present in the array at any given time.
+-   Implemention of Linked List in an efficient manner
 
 #### 1. Constructors
 
--   `Array()` -> Initializes an array with **length = 0** and **size = 10**.
--   `Array(int size)` -> Initializes an array with the given **size**.
--   `Array(int size, T arr[])` -> Initializes an array with the given **size** and fills it with the given **array**.
--   `Array(const Array<T>& array)` -> **_Copy Constructor_**. Initializes the Array object by copying the array from the given Array object.
+-   `LinkedList()` -> Initializes an empty linked list.
+-   `LinkedList(int n, const T arr[])` -> Initializes an linked list from the given array.
 
-#### 2. Mutators (Setter Methods)
+#### 2. Accessors (Getter Methods)
 
--   `void set(int index, T x)` -> Sets the value **x** at the specified **index** of the array.
+-   `int size() const` -> Returns the length of the linked list.
+-   `T at(int index) const` -> Returns the element at the specified index.
 
-#### 3. Accessors (Getter Methods)
+#### 3. Mutators (Setter Methods)
 
--   `T* getArray() const` -> Returns the pointer to the complete array.
--   `int getLength() const` -> Returns the **length** of the array.
--   `int getSize() const` -> Returns the **size (current maximum capacity)** of the array.
--   `T get(int index) const` -> Returns the **value** at the specified index.
+-   `void insert(int index, T data)` -> Inserts the element at the specified index in the linked list.
+-   `T remove(int index)` -> Removes the element at the specified index.
+-   `void prepend(T data)` -> Inserts the given element at the begin of the linked list.
+-   `void append(T data)` -> Appneds the given element at the end of the linked list.
+-   `T pop_front()` -> Pops and returns the element from the beginning of the linked list.
+-   `T pop_back` -> Pops and returns the element from the end of the linked list.
 
 #### 4. Facilitators
 
--   `void display() const` -> Prints space separated all the members of the array.
--   `int append(T x)` -> Appends the given element at the last of the array and returns the **length** of the new array.
--   `void insert(int index, T x)` -> Inserts the given element at the specified index in the array.
--   `T del(int index)` -> Deletes the element at the specified index from the array and returns the **deleted element**.
--   `int remove(T x)` -> Removes the given element from the array and returns the **index** on which it was previously present. Returns **-1** if the element was not found.
--   `T pop()` -> Removes the last element from the array and returns the element popped out.
--   `int search(T element, bool improvised=true)` -> Performs the linear search for the element specified and returns the index of the element. If **improvised** is `true`, it will swap the found element with the previous elements of the array to improve the efficiency in the next search. To prevent it set **improvised** to `false`. By default, improvised is set to `true`.
--   `int bin_search(T element)` -> Performs binary search on the array for the specified value and returns the **index** of it. Time complexity is of O(logN).
--   `T max()` -> Returns the largest element of the array.
--   `T min()` -> Returns the smallest element of the array.
--   `void reverse()` -> Reverses the array.
--   `void l_shift()` -> Left shifts all the elements of the array, and the **rightmost element becomes 0**.
--   `void r_shift()` -> Right shifts all the elements of the array, and the **leftmost element becomes 0**.
--   `void l_rotate()` -> Rotates all the elements of the array to the left, so that the element which was **previously the first element** in the array, **becomes the rightmost element** after rotation.
--   `void r_rotate()` -> Rotates all the elements of the array to the right, so that the element which was **previously the rightmost element** in the array, **becomes the first element** after rotation.
+-   `void display() const` -> Prints space separated all the members of the linked list.
+-   `void reverse()` -> Reverses the Linked List.
+-   `void concat(LinkedList& ll)` -> Concatenates the given linked list at the end of the linked list.
+
+#### 5. Enquiry Functions
+
+-   `bool isEmpty() const` -> Returns true if the linked list is empty.
 
 #### 5. Operator Overloads
 
 -   Subscript Operator(`[]`) -> Can be used to **access** and **assign** the value.
--   Insertion Operator(`<<`) -> For printing the whole array. Eg. `cout << arr;` **output** - `[1, 2, 3, 4, 5]` -->
+-   Insertion Operator(`<<`) -> For printing the whole linked list. Eg. `cout << ll;` **output** - `1 2 3 4 5`

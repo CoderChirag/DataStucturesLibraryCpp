@@ -213,6 +213,28 @@ void LinkedList<T>::reverse(){
     first = last;
     last = temp;
 }
+template<class T>
+void LinkedList<T>::concat(LinkedList& ll){
+    if(ll.length == 0){
+        return;
+    }
+    if(ll.first == this->first){
+        throw std::runtime_error(std::string("Cannot concatente to itself"));
+    }
+    struct Node<T> *p = ll.first;
+    if(length == 0){
+        last->data = p->data;
+        p = p->next;
+    }
+    while(p != NULL){
+        last->next = new Node<T>;
+        last->next->data = p->data;
+        last->next->next = p->next;
+        last = last->next;
+        p = p->next;
+    }
+    length += ll.length;
+}
 
 
 

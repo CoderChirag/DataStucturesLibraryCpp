@@ -31,6 +31,7 @@ class LinkedList{
         // Facilitators
         void display() const;
         void reverse();
+        void concat(LinkedList& ll);
 
         // Enquiry Functions
         bool isEmpty() const;
