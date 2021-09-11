@@ -17,24 +17,27 @@ class LinkedList{
         LinkedList(int n, const T arr[]);
 
         // Accessors (Getter Functions)
-        int size();
+        int size() const;
+        T at(int index) const;
 
         // Mutators (Setter Functions)
         void insert(int index, T data);
         T remove(int index);
-
-        // Facilitators
-        void display();
         void prepend(T data);
         void append(T data);
         T pop_front();
         T pop_back();
 
+        // Facilitators
+        void display() const;
+        void reverse();
+
         // Enquiry Functions
-        bool isEmpty();
+        bool isEmpty() const;
 
         // Operator Overloads
-        template<class U>
+        T& operator[](int index) const;
+        template <class U>
         friend std::ostream &operator<<(std::ostream &cout, const LinkedList<U> &ll);
 
         // Destructor

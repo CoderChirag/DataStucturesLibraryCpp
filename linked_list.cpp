@@ -30,8 +30,19 @@ LinkedList<T>::LinkedList(int n, const T arr[]): LinkedList{}{
 
 // Accessors (Getter Functions)
 template<class T>
-int LinkedList<T>::size(){
+int LinkedList<T>::size() const{
     return length;
+}
+template<class T>
+T LinkedList<T>::at(int index) const{
+    if(index < 0 || index >= length){
+        throw std::runtime_error(std::string("Index out of bound exception"));
+    }
+    struct Node<T> *p = first;
+    for (int i = 0; i < index; i++){
+        p = p->next;
+    }
+    return p->data;
 }
 
 
@@ -94,22 +105,6 @@ T LinkedList<T>::remove(int index){
         }
     }
     return data;
-}
-
-
-// Facilitators
-template<class T>
-void LinkedList<T>::display(){
-    struct Node<T> *p = first;
-    if(length > 0){
-        while(p != NULL){
-            std::cout << p->data << " ";
-            p = p->next;
-        }
-        std::cout << std::endl;
-    }else{
-        std::cout << "" << std::endl;
-    }
 }
 template<class T>
 void LinkedList<T>::prepend(T data){
@@ -186,14 +181,60 @@ T LinkedList<T>::pop_back(){
 }
 
 
+// Facilitators
+template<class T>
+void LinkedList<T>::display() const{
+    struct Node<T> *p = first;
+    if(length > 0){
+        while(p != NULL){
+            std::cout << p->data << " ";
+            p = p->next;
+        }
+        std::cout << std::endl;
+    }else{
+        std::cout << "" << std::endl;
+    }
+}
+template<class T>
+void LinkedList<T>::reverse(){
+    if(length == 0){
+        return;
+    }
+    struct Node<T> *p = first;
+    struct Node<T> *q = NULL;
+    while(p != NULL){
+        struct Node<T> *temp = p->next;
+        p->next = q;
+        q = p;
+        p = temp;
+    }
+    struct Node<T> *temp = first;
+    first = temp;
+    first = last;
+    last = temp;
+}
+
+
+
 // Enquiry Functions
 template<class T>
-bool LinkedList<T>::isEmpty(){
+bool LinkedList<T>::isEmpty() const{
     return length > 0;
 }
 
 
 // Operator Overloads
+template<class T>
+T& LinkedList<T>::operator[](int index) const{
+    if(index < 0 || index >= length){
+        throw std::runtime_error(std::string("Index out of bound exception"));
+    }
+    struct Node<T> *p = first;
+    for (int i = 0; i < index; i++){
+        p = p->next;
+    }
+    return p->data;
+}
 template<class T>
 std::ostream& operator<<(std::ostream& cout, const LinkedList<T>& ll){
     struct Node<T> *p = ll.first;
