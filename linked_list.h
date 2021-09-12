@@ -9,7 +9,7 @@ template<class T>
 class LinkedList{
     private:
         struct Node<T> *first;
-        struct Node<T> *last;
+        struct Node<T> *tail;
         int length;
     public:
         // Constructors

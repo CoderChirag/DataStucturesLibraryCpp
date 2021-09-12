@@ -7,7 +7,7 @@ template<class T>
 LinkedList<T>::LinkedList(){
     first = new Node<T>;
     first->next = NULL;
-    last = first;
+    tail = first;
     length = 0;
 }
 template<class T>
@@ -16,7 +16,7 @@ LinkedList<T>::LinkedList(int n, const T arr[]): LinkedList{}{
     for (int i = 0; i < n; i++){
         p->data = arr[i];
         length++;
-        last = p;
+        tail = p;
         if(i != n-1){
             struct Node<T> *next = new Node<T>;
             p->next = next;
@@ -81,7 +81,7 @@ T LinkedList<T>::remove(int index){
             delete first;
             first = new Node<T>;
             first->next = NULL;
-            last = first;
+            tail = first;
             length--;
         }else{
             struct Node<T> *temp = first->next;
@@ -101,7 +101,7 @@ T LinkedList<T>::remove(int index){
         p->next = temp;
         length--;
         if(p->next == NULL){
-            last = p;
+            tail = p;
         }
     }
     return data;
@@ -125,11 +125,11 @@ void LinkedList<T>::append(T data){
         first->data = data;
         length++;
     }else{
-        struct Node<T> *last = new Node<T>;
-        last->data = data;
-        last->next = NULL;
-        this->last->next = last;
-        this->last = last;
+        struct Node<T> *tail = new Node<T>;
+        tail->data = data;
+        tail->next = NULL;
+        this->tail->next = tail;
+        this->tail = tail;
         length++;
     }
 }
@@ -142,7 +142,7 @@ T LinkedList<T>::pop_front(){
         delete first;
         first = new Node<T>;
         first->next = NULL;
-        last = first;
+        tail = first;
         length--;
         return data;
     }else{
@@ -163,7 +163,7 @@ T LinkedList<T>::pop_back(){
         delete first;
         first = new Node<T>;
         first->next = NULL;
-        last = first;
+        tail = first;
         length--;
         return data;
     }else{
@@ -171,10 +171,10 @@ T LinkedList<T>::pop_back(){
         while(p->next->next != NULL){
             p = p->next;
         }
-        T data = last->data;
-        delete last;
-        last = p;
-        last->next = NULL;
+        T data = tail->data;
+        delete tail;
+        tail = p;
+        tail->next = NULL;
         length--;
         return data;
     }
@@ -210,8 +210,8 @@ void LinkedList<T>::reverse(){
     }
     struct Node<T> *temp = first;
     first = temp;
-    first = last;
-    last = temp;
+    first = tail;
+    tail = temp;
 }
 template<class T>
 void LinkedList<T>::concat(LinkedList& ll){
@@ -223,14 +223,14 @@ void LinkedList<T>::concat(LinkedList& ll){
     }
     struct Node<T> *p = ll.first;
     if(length == 0){
-        last->data = p->data;
+        tail->data = p->data;
         p = p->next;
     }
     while(p != NULL){
-        last->next = new Node<T>;
-        last->next->data = p->data;
-        last->next->next = p->next;
-        last = last->next;
+        tail->next = new Node<T>;
+        tail->next->data = p->data;
+        tail->next->next = p->next;
+        tail = tail->next;
         p = p->next;
     }
     length += ll.length;
