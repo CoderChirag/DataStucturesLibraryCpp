@@ -54,10 +54,6 @@ template<class T>
 int Stack<T>::getCapacity() const{
     return capacity;
 }
-// template<class T>
-// int capacity(){
-//     return capacity;
-// }
 
 // Enquiry Functions
 template<class T>
@@ -75,6 +71,20 @@ T Stack<T>::pop(){
     stack[size - 1] = static_cast<T>(0);
     size--;
     return ele;
+}
+template<class T>
+void Stack<T>::push(T ele){
+    if(size == capacity){
+        T *temp = new T[size * 2];
+        for (int i = 0; i < size; i++){
+            temp[i] = stack[i];
+        }
+        delete[] stack;
+        stack = temp;
+        capacity *= 2;
+    }
+    stack[size] = ele;
+    size++;
 }
 
 // Facilitators

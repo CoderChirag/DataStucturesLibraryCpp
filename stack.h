@@ -28,6 +28,7 @@ class Stack{
 
         // Mutators (Setters)
         T pop();
+        void push(T ele);
 
         // // Accessors (Getters)
         // T* getArray() const;
