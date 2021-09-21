@@ -30,36 +30,15 @@ class Stack{
         T pop();
         void push(T ele);
 
-        // // Accessors (Getters)
-        // T* getArray() const;
-        // int getLength() const;
-        // int getSize() const;
-        // T get(int index) const;
-
         // Facilitators
         void display() const;
-        // int append(T element);
-        // void insert(int index, T element);
-        // T del(int index);
-        // int remove(T element);
-        // T pop();
-        // int search(T element, bool improvised=true) const;
-        // int bin_search(T element) const;
-        // T max() const;
-        // T min() const;
-        // void reverse();
-        // void l_shift();
-        // void r_shift();
-        // void l_rotate();
-        // void r_rotate();
-        // // sortings
 
-        // // Operator Overloadings
-        // T& operator[](int index) const;
-        // template<class U>
-        // friend std::ostream &operator<<(std::ostream &out, const Array<U>& arr);
+        // Operator Overloads
+        template<class U>
+        friend std::ostream &operator<<(std::ostream &cout, const Stack<U> &stack);
 
-        // // Destructors
-        // ~Array();
+
+        // Destructors
+        ~Stack();
 };
 #endif

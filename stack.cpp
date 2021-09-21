@@ -94,3 +94,18 @@ void Stack<T>::display() const{
         std::cout << stack[i] << std::endl;
     }
 }
+
+// Operator Overloads
+template<class T>
+std::ostream &operator<<(std::ostream& cout, const Stack<T>& stack){
+    for (int i = stack.size - 1; i >= 0; i--){
+        cout << stack.stack[i] << std::endl;
+    }
+    return cout;
+}
+
+// Destructors
+template<class T>
+Stack<T>::~Stack(){
+    delete[] stack;
+}
