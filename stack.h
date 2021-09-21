@@ -8,6 +8,7 @@ class Stack{
         size_t capacity;
         size_t size;
         T *stack;
+        T *top;
 
     public:
         // Constructors
@@ -17,8 +18,14 @@ class Stack{
         Stack(int capacity, const LinkedList<T>& ll);
         Stack(const Stack<T> &stack); // Copy Constructor
 
+        // Accessors (Getters)
+        T peek() const;
+
+        // Enquiry Functions
+        bool isEmpty() const;
+
         // Mutators (Setters)
-        // void set(int index, T element);
+        T pop();
 
         // // Accessors (Getters)
         // T* getArray() const;
