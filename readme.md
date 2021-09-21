@@ -378,3 +378,78 @@ Uses another class **_SparseElement_** for implementing the matrix.
 
 -   Subscript Operator(`[]`) -> Can be used to **access** and **assign** the value.
 -   Insertion Operator(`<<`) -> For printing the whole linked list. Eg. `cout << ll;` **output** - `1 2 3 4 5`
+
+## Stack
+
+-   Implements the dynamic stack.
+-   Built on template classes, so can be used for any data type
+
+### How to use
+
+1.  Place the files `stack.h` and `stack.cpp` inside the root folder of your project
+2.  Example code to use `Stack`:
+
+        // main.cpp
+        #include<iostream>
+        #include"stack.h"
+        #include"stack.cpp"
+        using namespace std;
+
+        int main(){
+            Stack<int> st{5};
+
+            st.push(1);
+            st.push(5);
+            st.push(8);
+
+            cout << st.getSize() <<endl;
+            cout << st.getCapacity() <<endl;
+
+            st.pop();
+            cout << st;
+
+        }
+
+3.  To compile and run the code, write in terminal:
+    > g++ main.cpp -o main && main.exe
+
+### Documentation
+
+The Stack class maintains an array, with its 3 properties:- **size** and **capacity** and the **top pointer**.
+
+**size** -> It is the size of the stack, or the number of elements currently filled in the stack.
+
+**capacity** -> It is the maximum number of elements it can hold presently. It is increased automatically as the user fills the stack. The default capacity is 10.
+
+**top pointer** -> It is the pointer pointing to the top element of the stack.
+
+#### 1. Constructors
+
+-   `Stack()` -> Initializes a stack.
+-   `Stack(int capacity)` -> Initializes a stack with the given **capacity**.
+-   `Stack(int size, T arr[])` -> Initializes a stack with the given **size** and fills it with the given **array**.
+-   `Stack(int capacity, const LinkedList<T>& ll)` -> Initializes the stack with the given **capacity** and fill the stack from the elements given in the LinkedList.
+-   `Stack(const Stack<T>& stack)` -> **_Copy Constructor_**. Initializes the Stack object by copying the stack from the given Stack object.
+
+#### 2. Mutators (Setter Methods)
+
+-   `T pop() const` -> Removes the topmost element of the stack and returns the value.
+-   `void push(T ele)` -> Pushes the given element at the top of the stack.
+
+#### 3. Accessors (Getter Methods)
+
+-   `T peek() const` -> Returns the value of the topmost element of the stack.
+-   `int getSize() const` -> Returns the current size of the stack.
+-   `int getCapacity() const` -> Returns the current maximum capacity of the stack.
+
+#### 4. Enquiry Functions
+
+-   `bool isEmpty() const` -> Returns wether the stack is empty or not.
+
+#### 5. Facilitators
+
+-   `void display() const` -> Displays all the elements of the stack from top to bottom.
+
+#### 5. Operator Overloads
+
+-   Insertion Operator(`<<`) -> For printing the whole stack from top to bottom.

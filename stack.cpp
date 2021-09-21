@@ -70,6 +70,7 @@ T Stack<T>::pop(){
     T ele = stack[size - 1];
     stack[size - 1] = static_cast<T>(0);
     size--;
+    top = stack + size - 1;
     return ele;
 }
 template<class T>
@@ -85,6 +86,7 @@ void Stack<T>::push(T ele){
     }
     stack[size] = ele;
     size++;
+    top = stack + size - 1;
 }
 
 // Facilitators
