@@ -20,6 +20,8 @@ class Stack{
 
         // Accessors (Getters)
         T peek() const;
+        int getSize() const;
+        int getCapacity() const;
 
         // Enquiry Functions
         bool isEmpty() const;

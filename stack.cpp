@@ -46,6 +46,18 @@ template<class T>
 T Stack<T>::peek() const{
     return *top;
 }
+template<class T>
+int Stack<T>::getSize() const{
+    return size;
+}
+template<class T>
+int Stack<T>::getCapacity() const{
+    return capacity;
+}
+// template<class T>
+// int capacity(){
+//     return capacity;
+// }
 
 // Enquiry Functions
 template<class T>
