@@ -1,5 +1,5 @@
-#ifndef ARRAY_H
-#define ARRAY_H
+#ifndef STACK_H
+#define STACK_H
 #include "linked_list.h"
 // #include "linked_list.cpp"
 template <class T>
