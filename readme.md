@@ -453,3 +453,74 @@ The Stack class maintains an array, with its 3 properties:- **size** and **capac
 #### 5. Operator Overloads
 
 -   Insertion Operator(`<<`) -> For printing the whole stack from top to bottom.
+
+## Queue
+
+-   Implements the **QUEUE** Data Structure.
+-   Built on template classes, so can be used for any data type
+
+### How to use
+
+1.  Place the files `queue.h` and `queue.cpp` inside the root folder of your project
+2.  Example code to use `Queue`:
+
+        // main.cpp
+        #include<iostream>
+        #include"queue.h"
+        #include"queue.cpp"
+        using namespace std;
+
+        int main(){
+            int arr[]{1, 2, 3, 4, 5}
+            Queue<int> q{5, arr};
+
+            cout << "Front: " << q.getFront() << ", Rear: " << q.getRear() << ", Size: " << q.size() << endl << endl;
+            q.display();
+            cout << endl;
+
+            q.enqueue(8);
+            cout << q.dequeue() << endl;
+
+            cout << q;
+        }
+
+3.  To compile and run the code, write in terminal:
+    > g++ main.cpp -o main && main.exe
+
+### Documentation
+
+The Queue class maintains a Queue, with its 2 properties:- **front**, **rear** and **length**.
+
+**front** -> It is the pointer to the **front** node of the Queue.
+
+**rear** -> It is the pointer to the **last** node of the Queue.
+
+**length** -> It is the length of the Queue or the number of elements present inside the Queue.
+
+#### 1. Constructors
+
+-   `Queue()` -> Initializes a Queue with **front = NULL**, **rear = NULL** and **length = 0**.
+-   `Queue(int length, T arr[])` -> Initializes a Queue with the given **length** and fills it with the given **array**.
+
+#### 2. Mutators (Setter Methods)
+
+-   `void enqueue(T data)` -> Pushes the given element inside the Queue.
+-   `T dequeue()` -> Pop out and return the first element of the Queue according to the **FIFO (First In First Out)** rule.
+
+#### 3. Accessors (Getter Methods)
+
+-   `int size() const` -> Returns the **length** of the Queue.
+-   `int getFront() const` -> Returns the value of the **Front** Node.
+-   `T getRear() const` -> Returns the value of the **Rear** Node.
+
+#### 4. Facilitators
+
+-   `void display() const` -> Prints space separated all the members of the Queue.
+
+#### 5. Enquiry Functions
+
+-   `bool isEmpty() const` -> Returns `true` if the Queue is **Empty**.
+
+#### 6. Operator Overloads
+
+-   Insertion Operator(`<<`) -> For printing the whole Queue. Eg. `cout << q;` **output** - `1 2 3 4 5`
