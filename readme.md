@@ -1,4 +1,4 @@
-# My Data Structures Library
+# Data Structures Library : STL-like C++ library for implementing various Data Structures 
 
 This library is created for using various Data Structures easily in C++.
 
