@@ -13,12 +13,12 @@ template <class T>
 Queue<T>::Queue(int length, const T arr[]): Queue{}{
     for (int i = 0; i < length; i++){
         if(front == NULL){
-            front = new Node<T>;
+            front = new queue_node::Node<T>;
             front->data = arr[i];
             front->next = NULL;
             rear = front;
         }else{
-            rear->next = new Node<T>;
+            rear->next = new queue_node::Node<T>;
             rear = rear->next;
             rear->data = arr[i];
             rear->next = NULL;
@@ -51,12 +51,12 @@ T Queue<T>::getRear() const{
 template<class T>
 void Queue<T>::enqueue(T data){
     if(rear == NULL){
-        front = new Node<T>;
+        front = new queue_node::Node<T>;
         front->data = data;
         front->next = NULL;
         rear = front;
     }else{
-        rear->next = new Node<T>;
+        rear->next = new queue_node::Node<T>;
         rear = rear->next;
         rear->data = data;
         rear->next = NULL;
@@ -70,21 +70,21 @@ T Queue<T>::dequeue(){
         throw std::runtime_error(std::string("Queue is empty"));
     }
 
-    struct Node<T>* node = front;
+    struct queue_node::Node<T>* Node = front;
     T data = front->data;
     front = front->next;
     if(front == NULL){
         rear = NULL;
     }
     length--;
-    delete node;
+    delete Node;
     return data;
 }
 
 // Facilitators
 template<class T>
 void Queue<T>::display() const{
-    struct Node<T> *i = front;
+    struct queue_node::Node<T> *i = front;
     while (i != NULL){
         std::cout << i->data << " ";
         i = i->next;
@@ -104,7 +104,7 @@ bool Queue<T>::isEmpty() const{
 // Operator Overloads
 template<class T>
 std::ostream &operator<<(std::ostream &cout, const Queue<T> &q){
-    struct Node<T> *i = q.front;
+    struct queue_node::Node<T> *i = q.front;
     while(i != NULL){
         cout << i->data << " ";
         i = i->next;
@@ -117,9 +117,9 @@ std::ostream &operator<<(std::ostream &cout, const Queue<T> &q){
 template<class T>
 Queue<T>::~Queue(){
     while(front != NULL){
-        struct Node<T> *node = front;
+        struct queue_node::Node<T> *Node = front;
         front = front->next;
-        delete node;
+        delete Node;
     }
     rear = NULL;
 }

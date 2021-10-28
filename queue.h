@@ -1,15 +1,17 @@
 #ifndef QUEUE_H
 #define QUEUE_H
-template<class T>
-struct Node{
-    T data;
-    struct Node *next;
-};
+namespace queue_node{
+    template<class T>
+    struct Node{
+        T data;
+        struct Node *next;
+    };
+}
 template<class T>
 class Queue{
     private:
-        struct Node<T> *front;
-        struct Node<T> *rear;
+        struct queue_node::Node<T> *front;
+        struct queue_node::Node<T> *rear;
         int length;
     public:
         // Constructors

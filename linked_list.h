@@ -1,15 +1,17 @@
 #ifndef LINKED_LIST_H
 #define LINKED_LIST_H
-template<class T>
-struct Node{
-    T data;
-    struct Node *next;
-};
+namespace linked_list{
+    template<class T>
+    struct Node{
+        T data;
+        struct Node *next;
+    };
+}
 template<class T>
 class LinkedList{
     private:
-        struct Node<T> *first;
-        struct Node<T> *tail;
+        struct linked_list::Node<T> *first;
+        struct linked_list::Node<T> *tail;
         int length;
     public:
         // Constructors
