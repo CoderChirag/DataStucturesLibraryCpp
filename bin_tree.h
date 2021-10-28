@@ -13,8 +13,15 @@ class BinTree{
     private:
         struct bin_tree_node::Node<T> *root;
         int nodeCount;
+        
         void preorder(T* pre, bin_tree_node::Node<T> *root) const;
         int preorderAndCount(T* pre, bin_tree_node::Node<T> *root) const;
+        void inorder(T* in, bin_tree_node::Node<T> *root) const;
+        int inorderAndCount(T* in, bin_tree_node::Node<T> *root) const;
+        void postorder(T* post, bin_tree_node::Node<T> *root) const;
+        int postorderAndCount(T* post, bin_tree_node::Node<T> *root) const;
+        void levelorder(T* level, bin_tree_node::Node<T> *root) const;
+        int levelorderAndCount(T* level, bin_tree_node::Node<T> *root) const;
     public:
         // Constructors
         BinTree();
@@ -25,19 +32,17 @@ class BinTree{
         // Accessors (Getter Functions)
         T* preorder() const;
         T* preorder(bin_tree_node::Node<T>* root) const;
-        // T* postorder() const;
-        // T* inorder() const;
-        // T* inorder(bin_tree_node::Node *root) const;
-        // T* levelorder() const;
-        // T* levelorder(bin_tree_node::Node *root) const;
-        // T lChild() const;
-        // T lChild(bin_tree_node::Node* root) const;
-        // T rChild() const;
-        // T rChild(bin_tree_node::Node* root) const;
-        // int height() const;
-        // int height(bin_tree_node::Node *root) const;
-        // int nodesCount() const;
-        // int nodesCount(bin_tree_node::Node *root) const;
+        T* inorder() const;
+        T* inorder(bin_tree_node::Node<T>* root) const;
+        T* postorder() const;
+        T* postorder(bin_tree_node::Node<T>* root) const;
+        T* levelorder() const;
+        T* levelorder(bin_tree_node::Node<T>* root) const;
+        bin_tree_node::Node<T>* getRootNode() const;
+        int height() const;
+        int height(bin_tree_node::Node<T> *root) const;
+        int nodesCount() const;
+        int nodesCount(bin_tree_node::Node<T> *root) const;
 
         // // Mutators (Setter Functions)
         // void createTreeFromUserInput();

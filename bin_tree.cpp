@@ -148,3 +148,193 @@ int BinTree<T>::preorderAndCount(T* pre, bin_tree_node::Node<T>* root) const{
     }
     return 0;
 }
+template<class T>
+T* BinTree<T>::inorder() const{
+    T *in = new T[nodeCount];
+    inorder(in, this->root);
+    return in;
+}
+template<class T>
+T* BinTree<T>::inorder(bin_tree_node::Node<T>* root) const{
+    T *in = new T[nodeCount];
+    int len = inorderAndCount(in, root);
+    T *inOrder = new T[len];
+    for (int i = 0; i < len; i++){
+        inOrder[i] = in[i];
+    }
+    return inOrder;
+} 
+template<class T>
+void BinTree<T>::inorder(T* in, bin_tree_node::Node<T> *root) const{
+    static int count = 0;
+    if(count >= nodeCount){
+        return;
+    }
+    if(root){
+        inorder(in, root->lchild);
+        in[count] = root->data;
+        count++;
+        inorder(in, root->rchild);
+    }
+}
+template<class T>
+int BinTree<T>::inorderAndCount(T* in, bin_tree_node::Node<T>* root) const{
+    static int count = 0;
+    if(count >= nodeCount){
+        throw std::runtime_error(std::string("Error: The node provided is not of this Binary Tree"));
+    }
+    if(root){
+        inorderAndCount(in, root->lchild);
+        in[count] = root->data;
+        count++;
+        inorderAndCount(in, root->rchild);
+        return count;
+    }
+    return 0;
+}
+template<class T>
+T* BinTree<T>::postorder() const{
+    T *post = new T[nodeCount];
+    postorder(post, this->root);
+    return post;
+}
+template<class T>
+T* BinTree<T>::postorder(bin_tree_node::Node<T>* root) const{
+    T *post = new T[nodeCount];
+    int len = postorderAndCount(post, root);
+    T *postOrder = new T[len];
+    for (int i = 0; i < len; i++){
+        postOrder[i] = post[i];
+    }
+    return postOrder;
+} 
+template<class T>
+void BinTree<T>::postorder(T* post, bin_tree_node::Node<T> *root) const{
+    static int count = 0;
+    if(count >= nodeCount){
+        return;
+    }
+    if(root){
+        postorder(post, root->lchild);
+        postorder(post, root->rchild);
+        post[count] = root->data;
+        count++;
+    }
+}
+template<class T>
+int BinTree<T>::postorderAndCount(T* post, bin_tree_node::Node<T>* root) const{
+    static int count = 0;
+    if(count >= nodeCount){
+        throw std::runtime_error(std::string("Error: The node provided is not of this Binary Tree"));
+    }
+    if(root){
+        postorderAndCount(post, root->lchild);
+        postorderAndCount(post, root->rchild);
+        post[count] = root->data;
+        count++;
+        return count;
+    }
+    return 0;
+}
+template<class T>
+T* BinTree<T>::levelorder() const{
+    T *level = new T[nodeCount];
+    levelorder(level, this->root);
+    return level;
+}
+template<class T>
+T* BinTree<T>::levelorder(bin_tree_node::Node<T>* root) const{
+    T *level = new T[nodeCount];
+    int len = levelorderAndCount(level, root);
+    T *levelOrder = new T[len];
+    for (int i = 0; i < len; i++){
+        levelOrder[i] = level[i];
+    }
+    return levelOrder;
+}
+template<class T>
+void BinTree<T>::levelorder(T* level, bin_tree_node::Node<T> *root) const{
+    static int count = 0;
+    if(count >= nodeCount){
+        return;
+    }
+    if(root){
+        bin_tree_node::Node<T> *p = root;
+        Queue<bin_tree_node::Node<T> *> q{};
+        q.enqueue(root);
+        level[count++] = root->data;
+        while(!q.isEmpty()){
+            p = q.dequeue();
+            if(p->lchild){
+                level[count++] = p->lchild->data;
+                q.enqueue(p->lchild);
+            }
+            if(p->rchild){
+                level[count++] = p->rchild->data;
+                q.enqueue(p->rchild);
+            }
+        }
+    }
+}
+template<class T>
+int BinTree<T>::levelorderAndCount(T* level, bin_tree_node::Node<T> *root) const{
+    static int count = 0;
+    if(count >= nodeCount){
+        throw std::runtime_error(std::string("Error: The node provided is not of this Binary Tree"));
+    }
+    if(root){
+        bin_tree_node::Node<T> *p = root;
+        Queue<bin_tree_node::Node<T> *> q{};
+        q.enqueue(root);
+        level[count++] = root->data;
+        while(!q.isEmpty()){
+            p = q.dequeue();
+            if(p->lchild){
+                level[count++] = p->lchild->data;
+                q.enqueue(p->lchild);
+            }
+            if(p->rchild){
+                level[count++] = p->rchild->data;
+                q.enqueue(p->rchild);
+            }
+        }
+        return count;
+    }
+    return 0;
+}
+template<class T>
+bin_tree_node::Node<T>* BinTree<T>::getRootNode() const{
+    return root;
+}
+template<class T>
+int BinTree<T>::height() const{
+    return height(root);
+}
+template<class T>
+int BinTree<T>::height(bin_tree_node::Node<T>* root) const{
+    int x = 0, y = 0;
+    if(!root){
+        return 0;
+    }
+    x = height(root->lchild);
+    y = height(root->rchild);
+    if(x > y){
+        return ++x;
+    }else{
+        return ++y;
+    }
+}
+template<class T>
+int BinTree<T>::nodesCount() const{
+    return nodeCount;
+}
+template<class T>
+int BinTree<T>::nodesCount(bin_tree_node::Node<T>* root) const{
+    int x, y;
+    if(root){
+        x = nodesCount(root->lchild);
+        y = nodesCount(root->rchild);
+        return x + y + 1;
+    }
+    return 0;
+}
