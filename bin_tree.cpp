@@ -1,4 +1,5 @@
 #include <iostream>
+#include <stdexcept>
 #include "bin_tree.h"
 #include "queue.h"
 #include "queue.cpp"
@@ -100,4 +101,50 @@ BinTree<T>::BinTree(BinTree<T>& bin_tree): BinTree{}{
         // std::cout << this->root->data << std::endl;
 
     }
+}
+
+// --------------- Accessors (Getters) ---------------------------------------
+template<class T>
+T* BinTree<T>::preorder() const{
+    T *pre = new T[nodeCount];
+    preorder(pre, this->root);
+    return pre;
+}
+template<class T>
+T* BinTree<T>::preorder(bin_tree_node::Node<T>* root) const{
+    T *pre = new T[nodeCount];
+    int len = preorderAndCount(pre, root);
+    T *preOrder = new T[len];
+    for (int i = 0; i < len; i++){
+        preOrder[i] = pre[i];
+    }
+    return preOrder;
+} 
+template<class T>
+void BinTree<T>::preorder(T* pre, bin_tree_node::Node<T> *root) const{
+    static int count = 0;
+    if(count >= nodeCount){
+        return;
+    }
+    if(root){
+        pre[count] = root->data;
+        count++;
+        preorder(pre, root->lchild);
+        preorder(pre, root->rchild);
+    }
+}
+template<class T>
+int BinTree<T>::preorderAndCount(T* pre, bin_tree_node::Node<T>* root) const{
+    static int count = 0;
+    if(count >= nodeCount){
+        throw std::runtime_error(std::string("Error: The node provided is not of this Binary Tree"));
+    }
+    if(root){
+        pre[count] = root->data;
+        count++;
+        preorderAndCount(pre, root->lchild);
+        preorderAndCount(pre, root->rchild);
+        return count;
+    }
+    return 0;
 }

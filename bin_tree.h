@@ -13,6 +13,8 @@ class BinTree{
     private:
         struct bin_tree_node::Node<T> *root;
         int nodeCount;
+        void preorder(T* pre, bin_tree_node::Node<T> *root) const;
+        int preorderAndCount(T* pre, bin_tree_node::Node<T> *root) const;
     public:
         // Constructors
         BinTree();
@@ -20,11 +22,10 @@ class BinTree{
         BinTree(bin_tree_node::Node<T> *root);
         BinTree(BinTree<T>& bin_tree);
 
-        // // Accessors (Getter Functions)
-        // T* preorder() const;
-        // T* preorder(bin_tree_node::Node *root) const;
+        // Accessors (Getter Functions)
+        T* preorder() const;
+        T* preorder(bin_tree_node::Node<T>* root) const;
         // T* postorder() const;
-        // T* postorder(bin_tree_node::Node *root) const;
         // T* inorder() const;
         // T* inorder(bin_tree_node::Node *root) const;
         // T* levelorder() const;
