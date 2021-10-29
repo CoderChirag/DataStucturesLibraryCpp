@@ -338,3 +338,127 @@ int BinTree<T>::nodesCount(bin_tree_node::Node<T>* root) const{
     }
     return 0;
 }
+//---------------------- Mutators (Setters) -----------------------------
+template<class T>
+void BinTree<T>::createTreeFromUserInput(){
+    if(root){
+        destroyCurrentBinaryTree();
+    }
+    root = new bin_tree_node::Node<T>;
+    Queue<bin_tree_node::Node<T>*> q{};
+    root->lchild = root->rchild = NULL;
+    std::cout << "Enter the root value: ";
+    std::cin >> root->data;
+    q.enqueue(root);
+    while(!q.isEmpty()){
+        bin_tree_node::Node<T>* p = q.dequeue();
+        T x;
+        std::cout << std::endl << "Enter the Left Child of " << p->data << ": ";
+        std::cin >> x;
+        if(x != -1){
+            p->lchild = new bin_tree_node::Node<T>;
+            p->lchild->lchild = p->lchild->rchild = NULL;
+            p->lchild->data = x;
+            q.enqueue(p->lchild);
+        }
+        std::cout << std::endl << "Enter the Right Child of " << p->data << ": ";
+        std::cin >> x;
+        if(x != -1){
+            p->rchild = new bin_tree_node::Node<T>;
+            p->rchild->lchild = p->rchild->rchild = NULL;
+            p->rchild->data = x;
+            q.enqueue(p->rchild);
+        }
+    }
+}
+template<class T>
+void BinTree<T>::destroyCurrentBinaryTree(){
+    destroyCurrentBinaryTree(root);
+    root = NULL;
+} 
+template<class T>
+void BinTree<T>::destroyCurrentBinaryTree(bin_tree_node::Node<T>* root){
+    if(root){
+        destroyCurrentBinaryTree(root->lchild);
+        destroyCurrentBinaryTree(root->rchild);
+        std::cout << root->data << " ";
+        delete root;
+    }
+}
+
+// ------------- Facilitators -------------------------------------------
+template<class T>
+void BinTree<T>::displayAsPreorder() const{
+    displayAsPreorder(root);
+}
+template<class T>
+void BinTree<T>::displayAsInorder() const{
+    displayAsInorder(root);
+}
+template<class T>
+void BinTree<T>::displayAsPostorder() const{
+    displayAsPostorder(root);
+}
+template<class T>
+void BinTree<T>::displayAsLevelorder() const{
+    displayAsLevelorder(root);
+}
+template<class T>
+void BinTree<T>::displayAsPreorder(bin_tree_node::Node<T>* root) const{
+    if(root){
+        std::cout << root->data << " ";
+        displayAsPreorder(root->lchild);
+        displayAsPreorder(root->rchild);
+    }
+}
+template<class T>
+void BinTree<T>::displayAsInorder(bin_tree_node::Node<T>* root) const{
+    if(root){
+        displayAsInorder(root->lchild);
+        std::cout << root->data << " ";
+        displayAsInorder(root->rchild);
+    }
+}
+template<class T>
+void BinTree<T>::displayAsPostorder(bin_tree_node::Node<T>* root) const{
+    if(root){
+        displayAsPostorder(root->lchild);
+        displayAsPostorder(root->rchild);
+        std::cout << root->data << " ";
+    }
+}
+template<class T>
+void BinTree<T>::displayAsLevelorder(bin_tree_node::Node<T>* root) const{
+    if(root){
+        std::cout << root->data << " ";
+        Queue<bin_tree_node::Node<T> *> q{};
+        q.enqueue(root);
+        while(!q.isEmpty()){
+            bin_tree_node::Node<T> *p = q.dequeue();
+            if(p->lchild){
+                std::cout << p->lchild->data << " ";
+                q.enqueue(p->lchild);
+            }
+            if(p->rchild){
+                std::cout << p->rchild->data << " ";
+                q.enqueue(p->rchild);
+            }
+        }
+        std::cout << std::endl;
+    }else{
+        std::cout << std::endl;
+    }
+
+}
+
+// ----------------------- EnquiryFunctions --------------------------------
+template<class T>
+bool BinTree<T>::isEmpty() const{
+    return root ? false : true;
+}
+
+// -------------------------- Destructor ---------------------------
+template<class T>
+BinTree<T>::~BinTree(){
+    destroyCurrentBinaryTree();
+}

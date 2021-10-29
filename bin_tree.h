@@ -44,31 +44,26 @@ class BinTree{
         int nodesCount() const;
         int nodesCount(bin_tree_node::Node<T> *root) const;
 
-        // // Mutators (Setter Functions)
-        // void createTreeFromUserInput();
-        // void setLChild(T data);
-        // void setLChild(bin_tree_node::Node* node);
-        // void setLChild(BinTree& bin_tree);
-        // void setRChild(T data);
-        // void setRChild(bin_tree_node::Node* node);
-        // void setRChild(BinTree& bin_tree);
-        // void deleteLChild(bin_tree_node::Node* node);
-        // void deleteRChild(bin_tree_node::Node* node);
+        // Mutators (Setter Functions)
+        void createTreeFromUserInput();
+        void destroyCurrentBinaryTree();
+        void destroyCurrentBinaryTree(bin_tree_node::Node<T>* root);
 
-        // // Facilitators
-        // void displayAsPreorder() const;
-        // void displayAsPostorder() const;
-        // void displayAsInorder() const;
-        // void displayAsLevelorder() const;
 
-        // // Enquiry Functions
-        // bool isEmpty() const;
+        // Facilitators
+        void displayAsPreorder() const;
+        void displayAsPreorder(bin_tree_node::Node<T>* root) const;
+        void displayAsPostorder() const;
+        void displayAsPostorder(bin_tree_node::Node<T>* root) const;
+        void displayAsInorder() const;
+        void displayAsInorder(bin_tree_node::Node<T>* root) const;
+        void displayAsLevelorder() const;
+        void displayAsLevelorder(bin_tree_node::Node<T>* root) const;
 
-        // // Operator Overloads
-        // template <class U>
-        // friend std::ostream &operator<<(std::ostream &cout, const BinTree<T> &q);
+        // Enquiry Functions
+        bool isEmpty() const;
 
-        // // Destructor
-        // ~BinTree();
+        // Destructor
+        ~BinTree();
 };
 #endif
