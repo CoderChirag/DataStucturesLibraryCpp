@@ -6,24 +6,31 @@
 
 // ------------------ Constructors -----------------------------------
 template<class T>
+bin_tree_node::Node<T>::Node(T data, struct bin_tree_node::Node<T>* lchild, struct bin_tree_node::Node<T>* rchild){
+    this->data = data;
+    this->lchild = lchild;
+    this->rchild = rchild;
+}
+
+template<class T>
 BinTree<T>::BinTree(){
     root = NULL;
     nodeCount = 0;
 }
 template<class T>
 BinTree<T>::BinTree(T root_val){
-    root = new bin_tree_node::Node<T>;
-    root->lchild = root->rchild = NULL;
-    root->data = root_val;
+    root = new bin_tree_node::Node<T>{root_val};
+    // root->lchild = root->rchild = NULL;
+    // root->data = root_val;
     nodeCount++;
 }
 template<class T>
 BinTree<T>::BinTree(bin_tree_node::Node<T>* root): BinTree{}{
     if(root){
         bin_tree_node::Node<T>* r = root;
-        this->root = new bin_tree_node::Node<T>;
+        this->root = new bin_tree_node::Node<T>{};
         nodeCount++;
-        this->root->lchild = this->root->rchild = NULL;
+        // this->root->lchild = this->root->rchild = NULL;
         bin_tree_node::Node<T>* p = this->root;
         p->data = r->data;
         Queue<bin_tree_node::Node<T>*> q1{};
@@ -35,20 +42,20 @@ BinTree<T>::BinTree(bin_tree_node::Node<T>* root): BinTree{}{
             r = q1.dequeue();
             p = q2.dequeue();
             if(r->lchild){
-                bin_tree_node::Node<T> *t = new bin_tree_node::Node<T>;
+                bin_tree_node::Node<T> *t = new bin_tree_node::Node<T>{r->lchild->data};
                 nodeCount++;
-                t->data = r->lchild->data;
-                t->lchild = t->rchild = NULL;
+                // t->data = r->lchild->data;
+                // t->lchild = t->rchild = NULL;
                 p->lchild = t;
                 q1.enqueue(r->lchild);
                 q2.enqueue(p->lchild);
                 // std::cout << "r->lchild: " << r->lchild->data << ", p->lchild: " << p->lchild->data << std::endl;
             }
             if(r->rchild){
-                bin_tree_node::Node<T> *t = new bin_tree_node::Node<T>;
+                bin_tree_node::Node<T> *t = new bin_tree_node::Node<T>{r->rchild->data};
                 nodeCount++;
-                t->data = r->rchild->data;
-                t->lchild = t->rchild = NULL;
+                // t->data = r->rchild->data;
+                // t->lchild = t->rchild = NULL;
                 p->rchild = t;
                 q1.enqueue(r->rchild);
                 q2.enqueue(p->rchild);
@@ -63,9 +70,9 @@ template<class T>
 BinTree<T>::BinTree(BinTree<T>& bin_tree): BinTree{}{
     if(bin_tree.root){
         bin_tree_node::Node<T>* r = bin_tree.root;
-        this->root = new bin_tree_node::Node<T>;
+        this->root = new bin_tree_node::Node<T>{};
         nodeCount++;
-        this->root->lchild = this->root->rchild = NULL;
+        // this->root->lchild = this->root->rchild = NULL;
         bin_tree_node::Node<T>* p = this->root;
         p->data = r->data;
         Queue<bin_tree_node::Node<T>*> q1{};
@@ -77,20 +84,20 @@ BinTree<T>::BinTree(BinTree<T>& bin_tree): BinTree{}{
             r = q1.dequeue();
             p = q2.dequeue();
             if(r->lchild){
-                bin_tree_node::Node<T> *t = new bin_tree_node::Node<T>;
+                bin_tree_node::Node<T> *t = new bin_tree_node::Node<T>{r->lchild->data};
                 nodeCount++;
-                t->data = r->lchild->data;
-                t->lchild = t->rchild = NULL;
+                // t->data = r->lchild->data;
+                // t->lchild = t->rchild = NULL;
                 p->lchild = t;
                 q1.enqueue(r->lchild);
                 q2.enqueue(p->lchild);
                 // std::cout << "r->lchild: " << r->lchild->data << ", p->lchild: " << p->lchild->data << std::endl;
             }
             if(r->rchild){
-                bin_tree_node::Node<T> *t = new bin_tree_node::Node<T>;
+                bin_tree_node::Node<T> *t = new bin_tree_node::Node<T>{r->rchild->data};
                 nodeCount++;
-                t->data = r->rchild->data;
-                t->lchild = t->rchild = NULL;
+                // t->data = r->rchild->data;
+                // t->lchild = t->rchild = NULL;
                 p->rchild = t;
                 q1.enqueue(r->rchild);
                 q2.enqueue(p->rchild);
@@ -344,9 +351,9 @@ void BinTree<T>::createTreeFromUserInput(){
     if(root){
         destroyCurrentBinaryTree();
     }
-    root = new bin_tree_node::Node<T>;
+    root = new bin_tree_node::Node<T>{};
     Queue<bin_tree_node::Node<T>*> q{};
-    root->lchild = root->rchild = NULL;
+    // root->lchild = root->rchild = NULL;
     std::cout << "Enter the root value: ";
     std::cin >> root->data;
     q.enqueue(root);
@@ -356,17 +363,17 @@ void BinTree<T>::createTreeFromUserInput(){
         std::cout << std::endl << "Enter the Left Child of " << p->data << ": ";
         std::cin >> x;
         if(x != -1){
-            p->lchild = new bin_tree_node::Node<T>;
-            p->lchild->lchild = p->lchild->rchild = NULL;
-            p->lchild->data = x;
+            p->lchild = new bin_tree_node::Node<T>{x};
+            // p->lchild->lchild = p->lchild->rchild = NULL;
+            // p->lchild->data = x;
             q.enqueue(p->lchild);
         }
         std::cout << std::endl << "Enter the Right Child of " << p->data << ": ";
         std::cin >> x;
         if(x != -1){
-            p->rchild = new bin_tree_node::Node<T>;
-            p->rchild->lchild = p->rchild->rchild = NULL;
-            p->rchild->data = x;
+            p->rchild = new bin_tree_node::Node<T>{x};
+            // p->rchild->lchild = p->rchild->rchild = NULL;
+            // p->rchild->data = x;
             q.enqueue(p->rchild);
         }
     }
@@ -381,7 +388,7 @@ void BinTree<T>::destroyCurrentBinaryTree(bin_tree_node::Node<T>* root){
     if(root){
         destroyCurrentBinaryTree(root->lchild);
         destroyCurrentBinaryTree(root->rchild);
-        std::cout << root->data << " ";
+        // std::cout << root->data << " ";
         delete root;
     }
 }

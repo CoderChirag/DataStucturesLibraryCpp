@@ -3,9 +3,10 @@
 namespace bin_tree_node{
     template<class T>
     struct Node{
-        struct Node *lchild;
+        Node(T data=static_cast<T>(0), struct Node<T> *lchild=NULL, struct Node<T> *rchild=NULL);
+        struct Node<T>* lchild;
         T data;
-        struct Node *rchild;
+        struct Node<T>* rchild;
     };
 }
 template<class T>

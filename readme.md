@@ -1,4 +1,4 @@
-# Data Structures Library : STL-like C++ library for implementing various Data Structures 
+# Data Structures Library : STL-like C++ library for implementing various Data Structures
 
 This library is created for using various Data Structures easily in C++.
 
@@ -524,3 +524,108 @@ The Queue class maintains a Queue, with its 2 properties:- **front**, **rear** a
 #### 6. Operator Overloads
 
 -   Insertion Operator(`<<`) -> For printing the whole Queue. Eg. `cout << q;` **output** - `1 2 3 4 5`
+
+## Binary Tree
+
+-   Implements the **Binary Tree** Data Structure.
+-   Built on template classes, so can be used for any data type
+
+### How to use
+
+1.  Place the files `queue.h` and `queue.cpp` inside the root folder of your project
+2.  Example code to use `Queue`:
+
+        // main.cpp
+        #include<iostream>
+        #include"bin_tree.h"
+        #include"bin_tree.cpp"
+        using namespace std;
+
+        int main(){
+            bin_tree_node::Node<int> n6{8};
+            bin_tree_node::Node<int> n7{9};
+            bin_tree_node::Node<int> n3{3, &n6, &n7};
+
+            bin_tree_node::Node<int> n4{2};
+            bin_tree_node::Node<int> n5{1};
+            bin_tree_node::Node<int> n2{4, &n4, &n5};
+
+            bin_tree_node::Node<int> n1{5, &n1, &n2};
+
+            BinTree<int> tree{&n1};
+
+            tree.displayAsPreorder();
+            cout << endl;
+            tree.displayAsInorder();
+            cout << endl;
+            tree.displayAsPostorder();
+            cout << endl;
+            tree.displayAsLevelorder();
+        }
+
+3.  To compile and run the code, write in terminal:
+    > g++ main.cpp -o main && main.exe
+
+### Documentation
+
+The **Binary Tree** implements a binary tree with the help of 1 Class and 1 Struct:- `class BinTree` and `struct node_bin_tree::Node`.
+
+The single nodes of **BinTree** class are based on the `struct bin_tree_node::Node<T>` .
+
+#### `struct bin_tree_node::Node<T>`
+
+##### 1. Properties
+
+-   `T data` -> **data** of the node
+-   `struct Node<T>* lchild` -> Pointer to the **left child**.
+-   `struct Node<T>* rchild` -> Pointer to the **right child**.
+
+##### 2. Constructor
+
+-   `Node(T data=static_cast<T>(0), stuct Node<T> *lchild=NULL, stuct Node<T>* rchild=NULL)` -> Initialises a new node with given data, left child, and right child.
+
+#### `class BinTree`
+
+##### 1. Constructors
+
+-   `BinTree()` -> Initializes an empty Binary Tree.
+-   `BinTree(T root_val)` -> Initializes a Binary Tree with the given data value of root node.
+-   `BinTree(bin_tree_node::Node<T>* root)` -> Initializes a Binary Tree with the given root node.
+-   `BinTree(BinTree<T>& bin_tree)` -> Clones a previously present binary tree.
+
+##### 2. Mutators (Setter Methods)
+
+-   `createTreeFromUserInput()` -> Destroys the current Binary Tree and creates new binary tree by taking input from the user. **NOTE: -** You can give -1 as input whereever you don't want a child Node.
+-   `destroyCurrentBinaryTree()` -> Destroys current Binary Tree and set root node to NULL.
+-   `destroyCurrentBinaryTree(bin_tree_node::Node<T>* root)` -> Destroys the binary tree starting from the given node.
+
+##### 3. Accessors (Getter Methods)
+
+-   `T* preorder() const` -> Returns an array filled with the elements of binary tree in **Preorder** sequence.
+-   `T* preorder(bin_tree_node::Node<T>* root) const` -> Returns an array filled with the elements of binary tree in **Preorder** sequence starting from the given node.
+-   `T* inorder() const` -> Returns an array filled with the elements of binary tree in **Inorder** sequence.
+-   `T* inorder(bin_tree_node::Node<T>* root) const` -> Returns an array filled with the elements of binary tree in **Inorder** sequence starting from the given node.
+-   `T* postorder() const` -> Returns an array filled with the elements of binary tree in **Postorder** sequence.
+-   `T* postorder(bin_tree_node::Node<T>* root) const` -> Returns an array filled with the elements of binary tree in **Postorder** sequence starting from the given node.
+-   `T* levelorder() const` -> Returns an array filled with the elements of binary tree in **Levelorder** sequence.
+-   `T* levelorder(bin_tree_node::Node<T>* root) const` -> Returns an array filled with the elements of binary tree in **Levelorder** sequence starting from the given node.
+-   `bin_tree_node::Node<T>* getRootNode() const` -> Returns the root node.
+-   `int height() const` -> Returns the height of the binary tree.
+-   `int height(bin_tree_node::Node<T>* root) const` -> Returns the height of the binary tree starting from the given node.
+-   `int nodesCount() const` -> Returns the number of nodes present in the tree.
+-   `int nodesCount(bin_tree_node::Node<T>* root) const` -> Returns the number of nodes present in the tree starting from the given node.
+
+##### 4. Facilitators
+
+-   `void displayAsPreorder() const` -> Displays the tree in the **Preorder** sequence.
+-   `void displayAsPreorder(bin_tree_node::Node<T>* root) const` -> Displays the tree in the **Preorder** sequence starting from the given node.
+-   `void displayAsPostorder() const` -> Displays the tree in the **Postorder** sequence.
+-   `void displayAsPostorder(bin_tree_node::Node<T>* root) const` -> Displays the tree in the **Postorder** sequence starting from the given node.
+-   `void displayAsInorder() const` -> Displays the tree in the **Inorder** sequence.
+-   `void displayAsPreorder(bin_tree_node::Node<T>* root) const` -> Displays the tree in the **Inorder** sequence starting from the given node.
+-   `void displayAsLevelorder() const` -> Displays the tree in the **Levelorder** sequence.
+-   `void displayAsLevelorder(bin_tree_node::Node<T>* root) const` -> Displays the tree in the **Levelorder** sequence starting from the given node.
+
+##### 5. Enquiry Functions
+
+-   `bool isEmpty() const` -> Returns `true` if the binary tree is **Empty** or root is **NULL**.
